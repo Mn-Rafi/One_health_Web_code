@@ -6,6 +6,7 @@ import 'package:one_health_doctor_and_admin/controllers/get_patient_by_id_contro
 import 'package:one_health_doctor_and_admin/controllers/login_controllers.dart';
 import 'package:one_health_doctor_and_admin/controllers/menu_controllers.dart';
 import 'package:one_health_doctor_and_admin/controllers/navigation_controller.dart';
+import 'package:one_health_doctor_and_admin/controllers/prescribe_medicine_controller.dart';
 import 'package:one_health_doctor_and_admin/controllers/profile_controller.dart';
 import 'package:one_health_doctor_and_admin/controllers/time_controller.dart';
 import 'package:one_health_doctor_and_admin/pages/login/loginpage.dart';
@@ -24,6 +25,7 @@ void main() {
   Get.put(PasswordChangeController());
   Get.put(DoctorProfileEditController());
   Get.put(GetPatientByIDController());
+  Get.put(PrescribeMedicineController());
   runApp(const MyApp());
 }
 

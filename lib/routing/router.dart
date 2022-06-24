@@ -4,6 +4,7 @@ import 'package:one_health_doctor_and_admin/pages/dashboard/dashboard.dart';
 import 'package:one_health_doctor_and_admin/pages/doctor/change_password_screen.dart';
 import 'package:one_health_doctor_and_admin/pages/doctor/edit_profile.dart';
 import 'package:one_health_doctor_and_admin/pages/patient_profile/patient_profile.dart';
+import 'package:one_health_doctor_and_admin/pages/patient_profile/prescribe_medicine.dart';
 import 'package:one_health_doctor_and_admin/pages/patients/patients.dart';
 import 'package:one_health_doctor_and_admin/pages/profile/profile.dart';
 import 'package:one_health_doctor_and_admin/routing/routes.dart';
@@ -22,6 +23,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case patientProfilePageView:
       return _getPageRoute(PatientProfilePage(
         map: settings.arguments,
+      ));
+    case prescribeMedicinePage:
+      return _getPageRoute(PrescribeMedicine(
+        arguments: settings.arguments,
       ));
     case authenticationPageView:
       return _getPageRoute(const ConfirmLogoutPage());

@@ -34,7 +34,7 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
                 return Center(
                   child: Text(
                     '${snapshot.error.toString()} occurred',
-                    style: TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 );
               } else if (snapshot.hasData) {
@@ -185,16 +185,15 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
                                 children: [
                                   CustomButtonOne(
                                       onPressed: () {
-                                        print('Appointment History');
-                                        // navigationController.navigateTo(
-                                        //     doctorEditProfile, '');
-                                      },
-                                      text: 'Appointment History'),
-                                  CustomButtonOne(
-                                      onPressed: () {
                                         print('Prescribe Medicine');
-                                        // navigationController.navigateTo(
-                                        //     doctorChangePasswordPage, '');
+                                        navigationController.navigateTo(
+                                            prescribeMedicinePage,
+                                            arguments: {
+                                              "name": snapshot.data!.firstName,
+                                              "id": snapshot.data!.id,
+                                              "isPatient":
+                                                  widget.map["isPatient"]
+                                            });
                                       },
                                       text: 'Prescribe Medicine'),
                                 ],

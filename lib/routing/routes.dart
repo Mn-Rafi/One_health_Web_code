@@ -7,6 +7,7 @@ const authenticationPageView = "Log Out";
 const doctorChangePasswordPage = 'doctorChangePassword';
 const doctorEditProfile = 'doctorEditProfile';
 const confirmLogoutPageRoute = 'confirmLogout';
+const prescribeMedicinePage = 'prescribeMedicine';
 
 List sideMenuitems = [
   dashBoardPageView,

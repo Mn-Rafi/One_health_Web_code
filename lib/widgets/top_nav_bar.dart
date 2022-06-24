@@ -25,8 +25,8 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                 key.currentState!.openDrawer();
               },
             ),
-      title: StreamBuilder<DoctorProfileModel?>(
-          stream: profileController.doctorProfileResponse(),
+      title: FutureBuilder<DoctorProfileModel?>(
+          future: profileController.doctorProfileResponse(),
           builder: (context, AsyncSnapshot<DoctorProfileModel?> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {

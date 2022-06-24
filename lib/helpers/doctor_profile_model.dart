@@ -27,4 +27,3 @@ class DoctorProfileModel {
   });
 }
 
-DoctorProfileModel? doctorProfileModel;

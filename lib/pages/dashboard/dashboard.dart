@@ -14,8 +14,8 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: StreamBuilder<DoctorProfileModel?>(
-          stream: profileController.doctorProfileResponse(),
+      child: FutureBuilder<DoctorProfileModel?>(
+          future: profileController.doctorProfileResponse(),
           builder: (context, AsyncSnapshot<DoctorProfileModel?> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {

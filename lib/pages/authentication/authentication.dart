@@ -12,7 +12,8 @@ class ConfirmLogoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: SizedBox(
-      height: 300,
+          width: 500,
+      height: 200,
       child: Card(
           margin: const EdgeInsets.all(30),
           color: lightGreyTwo,
@@ -24,12 +25,12 @@ class ConfirmLogoutPage extends StatelessWidget {
                 Flexible(
                   child: Text(
                     'Do You Really Want to Logout?',
-                    style: mainHeaderStyle.copyWith(color: Colors.black),
+                    style: mainHeaderStyle.copyWith(color: Colors.black, fontSize: 25),
                   ),
                 ),
                 Flexible(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(

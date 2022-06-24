@@ -5,25 +5,14 @@ import 'package:one_health_doctor_and_admin/helpers/doctor_profile_model.dart';
 import 'package:one_health_doctor_and_admin/routing/routes.dart';
 import 'package:one_health_doctor_and_admin/widgets/custom_botton_one.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: StreamBuilder<DoctorProfileModel?>(
-          stream: profileController.doctorProfileResponse(),
+      child: FutureBuilder<DoctorProfileModel?>(
+          future: profileController.doctorProfileResponse(),
           builder: (context, AsyncSnapshot<DoctorProfileModel?> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
@@ -200,14 +189,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                       onPressed: () {
                                         print('Edit Profile');
                                         navigationController.navigateTo(
-                                            doctorEditProfile, arguments: '');
+                                            doctorEditProfile,
+                                            arguments: '');
                                       },
                                       text: 'Edit Profile'),
                                   CustomButtonOne(
                                       onPressed: () {
                                         print('Change Password');
                                         navigationController.navigateTo(
-                                            doctorChangePasswordPage, arguments: '');
+                                            doctorChangePasswordPage,
+                                            arguments: '');
                                       },
                                       text: 'Change Password'),
                                 ],

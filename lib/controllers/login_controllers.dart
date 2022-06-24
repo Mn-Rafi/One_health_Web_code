@@ -52,13 +52,9 @@ class LoginPageController extends GetxController {
           '${response.data['doctorId']}',
           '${response.data['token']}'
         ]).then((value) {
-          // profileController.doctorProfileResponse();
-          doctorPatientsController.doctorPatientsResponse();
-          doctorAppointmentsController.doctorPatientsResponse();
-          // print(response.data);
-          // print('${response.data['doctorId']}' + '${response.data['token']}');
-          Future.delayed(const Duration(seconds: 1))
-              .then((value) => Get.to(SiteLayout()));
+          // doctorPatientsController.doctorPatientsResponse();
+          // doctorAppointmentsController.doctorPatientsResponse();
+          Get.offAll(SiteLayout());
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('Logged In Succesfully')));
         });
@@ -67,7 +63,8 @@ class LoginPageController extends GetxController {
       }
     } catch (e) {
       if (e is DioError) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.response!.data["message"])));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.response!.data["message"])));
         print(e.response!.data["message"]);
       }
     }

@@ -6,9 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends GetxController {
   static ProfileController instance = Get.find();
-  Stream<DoctorProfileModel?> doctorProfileResponse() async* {
+  Future<DoctorProfileModel?> doctorProfileResponse() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     DoctorProfileServices doctorProfileServices = DoctorProfileServices();
+    final DoctorProfileModel? doctorProfileModel;
     try {
       final response = await doctorProfileServices.getDoctorProfile(
         id: preferences.getStringList('doctorProfile')![0],
@@ -28,9 +29,8 @@ class ProfileController extends GetxController {
             imagePath: response.data['doctor']['image'],
             phoneNumber: response.data['doctor']['phone'].toString(),
             fee: response.data['doctor']['fee'].toString(),
-            days: response.data['doctor']['days']
-            );
-        yield doctorProfileModel;
+            days: response.data['doctor']['days']);
+        return doctorProfileModel;
       } else {
         throw DioError;
       }

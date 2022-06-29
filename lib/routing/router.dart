@@ -1,3 +1,7 @@
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_dashboard/admin_dashboard.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_departments/admin_departments.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_doctors/doctors_profile.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_profile/admin_profile.dart';
 import 'package:one_health_doctor_and_admin/pages/appointments/appointments.dart';
 import 'package:one_health_doctor_and_admin/pages/authentication/authentication.dart';
 import 'package:one_health_doctor_and_admin/pages/dashboard/dashboard.dart';
@@ -12,6 +16,18 @@ import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
+    case adminDashBoardPage:
+      return _getPageRoute(const AdminDashboard());
+    case adminAppointmentsPage:
+      return _getPageRoute(const AdminDashboard());
+    case adminPatientsPage:
+      return _getPageRoute(const AdminDashboard());
+    case adminDoctorsPage:
+      return _getPageRoute(const AdminDashboard());
+    case adminDepartmentsPage:
+      return _getPageRoute(AdminDepartment());
+    case adminProfilePage:
+      return _getPageRoute(AdminProfile());
     case dashBoardPageView:
       return _getPageRoute(const DashBoard());
     case patientsPageView:
@@ -24,6 +40,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(PatientProfilePage(
         map: settings.arguments,
       ));
+    case adminDoctorProfileViewPage:
+      return _getPageRoute(const DoctorProfileAdminSide());
     case prescribeMedicinePage:
       return _getPageRoute(PrescribeMedicine(
         arguments: settings.arguments,
@@ -31,7 +49,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case authenticationPageView:
       return _getPageRoute(const ConfirmLogoutPage());
     case doctorChangePasswordPage:
-      return _getPageRoute(const DoctorChangePassword());
+      return _getPageRoute(DoctorChangePassword(
+        map: settings.arguments,
+      ));
     case doctorEditProfile:
       return _getPageRoute(DoctorEditProfile());
     case confirmLogoutPageRoute:

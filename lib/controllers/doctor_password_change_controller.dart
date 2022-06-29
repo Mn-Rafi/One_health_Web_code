@@ -36,4 +36,33 @@ class PasswordChangeController extends GetxController {
       }
     }
   }
+
+  adminChangePassword(
+      String oldPassword, String newPassword, BuildContext context) async {
+    DoctorChangePasswordServices doctorChangePasswordServices =
+        DoctorChangePasswordServices();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String id = prefs.getStringList('adminProfile')![0];
+    final String token = prefs.getStringList('adminProfile')![1];
+
+    try {
+      final response = await doctorChangePasswordServices.changeAdminPassword(
+          oldPassword, newPassword, id, token);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print('Password Changed');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Password Changed Succesfully')));
+        navigationController.navigateTo(adminProfilePage, arguments: '');
+      } else {
+        throw DioError;
+      }
+    } catch (e) {
+      if (e is DioError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(e.response!.data["message"])));
+        print(e.response!.data["message"]);
+      }
+    }
+  }
 }

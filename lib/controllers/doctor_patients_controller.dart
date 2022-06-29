@@ -10,6 +10,8 @@ class DoctorPatientsController extends GetxController {
   Stream<List<DoctorPatientDetailsModel>?>? doctorPatientsResponse() async* {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     DoctorPatientsServices doctorPatientsServices = DoctorPatientsServices();
+
+    List<DoctorPatientDetailsModel> doctorPatientDetailsModelList = [];
     try {
       final response = await doctorPatientsServices.getDoctorPatients(
         id: preferences.getStringList('doctorProfile')![0],
@@ -29,7 +31,11 @@ class DoctorPatientsController extends GetxController {
             mobile: response.data['users'][i]['phone'].toString(),
           ));
         }
-
+        print(
+            '****************************************************************');
+        print(doctorPatientDetailsModelList.toString());
+        print(
+            '****************************************************************');
         yield doctorPatientDetailsModelList;
       } else {
         throw DioError;

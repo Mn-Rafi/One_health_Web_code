@@ -1,13 +1,12 @@
-import 'package:get/get.dart';
 import 'package:one_health_doctor_and_admin/constants/controller.dart';
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
-import 'package:one_health_doctor_and_admin/controllers/profile_controller.dart';
 import 'package:one_health_doctor_and_admin/helpers/doctor_profile_model.dart';
 import 'package:one_health_doctor_and_admin/helpers/responsiveness.dart';
 import 'package:one_health_doctor_and_admin/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
-AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
+AppBar adminTopNavBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
+    AppBar(
       elevation: 0,
       leading: !ResponsiveWidget.isScreenSmall(context)
           ? Row(
@@ -27,9 +26,9 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                 key.currentState!.openDrawer();
               },
             ),
-      title: FutureBuilder<DoctorProfileModel?>(
-          future: profileController.doctorProfileResponse(),
-          builder: (context, AsyncSnapshot<DoctorProfileModel?> snapshot) {
+      title: FutureBuilder<AdminProfileModel?>(
+          future: profileController.adminProfileResponse(),
+          builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 return Center(
@@ -58,27 +57,13 @@ AppBar topNavBar(BuildContext context, GlobalKey<ScaffoldState> key) => AppBar(
                   const SizedBox(
                     width: 24,
                   ),
-                  GetBuilder<ProfileController>(
-                    builder: (context) => CustomText(
-                      text: 'Dr. ${profileController.doctorProfileModel!.name}',
-                      fontColor: lightGrey,
-                    ),
+                  CustomText(
+                    text: snapshot.data!.name,
+                    fontColor: lightGrey,
                   ),
                   const SizedBox(
                     width: 16,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white),
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      margin: const EdgeInsets.all(2),
-                      child: CircleAvatar(
-                          backgroundColor: light,
-                          child: Image.network(snapshot.data!.imagePath)),
-                    ),
-                  )
                 ],
               );
             } else {

@@ -18,16 +18,19 @@ class EditDoctorProfileServise {
       "startTime": doctorEditProfileModel.startingTime,
       "endTime": doctorEditProfileModel.finishingTime,
       "fee": doctorEditProfileModel.feeAmount,
-      "image":
-          'https://res.cloudinary.com/dkj6u28th/image/upload/v1652852989/Profile/sxgyrh6qsm2zmzmbmokn.webp',
+      "admin": doctorEditProfileModel.isAdmin,
+      "image": doctorEditProfileModel.imagePath,
+      "active": true,
+      "request": false,
     };
+    print(doctorEditProfileModel.isAdmin.toString() + '===========================');
     Response response = await dio
-        .put('https://onehealthhospital.site/api/doctor/$id',
+        .put('https://onehealthhospital.online/api/doctor/$id',
             data: formData,
             options: Options(headers: {
               "auth-token": token,
             }))
-        .timeout(Duration(seconds: 5));
+        .timeout(const Duration(seconds: 5));
     return response;
   }
 }

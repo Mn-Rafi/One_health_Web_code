@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:one_health_doctor_and_admin/constants/controller.dart';
 
@@ -205,8 +203,8 @@ class _PrescribeMedicineState extends State<PrescribeMedicine>
                         dosage.add(presList[i].dosage.toString());
                         prescribedFor.add(presList[i].prescribedFor.toString());
                       }
-                      final Future<bool> isPrescribed =
-                          prescribeMedicineController.postPrescription(
+                      final bool isPrescribed =
+                          await prescribeMedicineController.postPrescription(
                         userId: widget.arguments["id"],
                         userName: widget.arguments["name"],
                         doctorName: 'doctor',
@@ -216,7 +214,7 @@ class _PrescribeMedicineState extends State<PrescribeMedicine>
                         context: context,
                       );
                       print('*****************************');
-                      if (await isPrescribed) {
+                      if (isPrescribed) {
                         print('HELOOOOOOOOOOOOOOOOO');
                         setState(() {});
                       }

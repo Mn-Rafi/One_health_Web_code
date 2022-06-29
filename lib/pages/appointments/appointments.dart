@@ -45,7 +45,7 @@ class AppointmentsPage extends StatelessWidget {
                         ])
                   ],
                 ),
-                StreamBuilder<List<DoctorAppointmentDetailsModel>>(
+                StreamBuilder<List<DoctorAppointmentDetailsModel?>?>(
                     stream:
                         doctorAppointmentsController.doctorPatientsResponse(),
                     builder: (context, snapshot) {
@@ -54,7 +54,19 @@ class AppointmentsPage extends StatelessWidget {
                           return Center(
                             child: Text(
                               '${snapshot.error.toString()} occurred',
-                              style: TextStyle(fontSize: 18),
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          );
+                        }
+                        if (snapshot.data!.isEmpty) {
+                          return const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'No Appointments Found',
+                                style:
+                                    TextStyle(fontSize: 18, color: Colors.black),
+                              ),
                             ),
                           );
                         }
@@ -64,30 +76,31 @@ class AppointmentsPage extends StatelessWidget {
                                   color: Colors.black, width: 0.2),
                               children: List<TableRow>.generate(
                                   snapshot.data!.length, (index) {
+                                print(snapshot.data!.length);
                                 return TableRow(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 50.0, vertical: 10),
-                                      child: Text(snapshot.data![index].name
+                                      child: Text(snapshot.data![index]!.name
                                           .toString()),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 50.0, vertical: 10),
-                                      child: Text(snapshot.data![index].date
+                                      child: Text(snapshot.data![index]!.date
                                           .toString()),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 50.0, vertical: 10),
-                                      child: Text(snapshot.data![index].time
+                                      child: Text(snapshot.data![index]!.time
                                           .toString()),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 50.0, vertical: 10),
-                                      child: Text(snapshot.data![index].reason
+                                      child: Text(snapshot.data![index]!.reason
                                           .toString()),
                                     ),
                                     Padding(
@@ -98,7 +111,8 @@ class AppointmentsPage extends StatelessWidget {
                                             navigationController.navigateTo(
                                               patientProfilePageView,
                                               arguments: {
-                                                "_id": snapshot.data![index].id,
+                                                "_id":
+                                                    snapshot.data![index]!.id,
                                                 "isPatient": false
                                               },
                                             );

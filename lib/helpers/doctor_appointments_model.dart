@@ -21,4 +21,3 @@ class DoctorAppointmentDetailsModel {
   });
 }
 
-List<DoctorAppointmentDetailsModel> doctorAppointmentDetailsModelList = [];

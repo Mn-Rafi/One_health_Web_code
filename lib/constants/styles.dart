@@ -17,3 +17,8 @@ final normalTextStyledark =
     GoogleFonts.ubuntu(color: const Color.fromARGB(255, 197, 197, 197));
 const BoxDecoration kboxdecoration = BoxDecoration(
     gradient: LinearGradient(colors: [Color(0xffa1c4fd), Color(0xffc2e9fb)]));
+
+showSnackBar({required BuildContext context, required String message}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)));
+}

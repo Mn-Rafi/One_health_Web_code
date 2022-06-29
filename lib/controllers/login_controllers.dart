@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:one_health_doctor_and_admin/api/admin_api/admin_login_api_services.dart';
 import 'package:one_health_doctor_and_admin/api/doctor_api/doctor_login_api_services.dart';
-import 'package:one_health_doctor_and_admin/constants/controller.dart';
+import 'package:one_health_doctor_and_admin/constants/styles.dart';
 import 'package:one_health_doctor_and_admin/main.dart';
 import 'package:one_health_doctor_and_admin/pages/login/login_with_otp/verify_otp.dart';
 import 'package:one_health_doctor_and_admin/pages/register/screen_register.dart';
@@ -48,12 +48,12 @@ class LoginPageController extends GetxController {
       if (response.statusCode == 200) {
         print('Logged In Succesfully');
         // Get.showSnackbar(GetSnackBar(title: "Logged In Succesfully"));
+        print(['${response.data['doctorId']}', '${response.data['token']}']);
+        await preferences.clear();
         await preferences.setStringList('doctorProfile', [
           '${response.data['doctorId']}',
           '${response.data['token']}'
         ]).then((value) {
-          // doctorPatientsController.doctorPatientsResponse();
-          // doctorAppointmentsController.doctorPatientsResponse();
           Get.offAll(SiteLayout());
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('Logged In Succesfully')));
@@ -70,22 +70,42 @@ class LoginPageController extends GetxController {
     }
   }
 
-  adminloginResponse(String email, String password) async {
+  adminloginResponse(
+      String email, String password, BuildContext context) async {
+    print('Admin Login Called');
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     AdminLoginSerices adminLoginSerices = AdminLoginSerices();
     try {
       final response = await adminLoginSerices.getUserResponseData(
           email: email, password: password);
       if (response.statusCode == 200) {
         print('Logged In Succesfully');
-        // Get.showSnackbar(GetSnackBar(title: "Logged In Succesfully"));
-        Get.to(SiteLayout());
+        await preferences.clear();
+        await preferences.setStringList('adminProfile', [
+          '${response.data['adminId']}',
+          '${response.data['token']}',
+          '${response.data['adminName']}'
+        ]).then((value) {
+          Get.offAll(SiteLayout());
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Logged In Succesfully')));
+        });
+        print('********************************8');
+        print([
+          '${response.data['adminId']}',
+          '${response.data['token']}',
+          '${response.data['adminName']}'
+        ]);
+        print('***************************');
+        print(response.data);
       } else {
+        print(response.statusCode);
         throw DioError;
       }
     } catch (e) {
+      showSnackBar(context: context, message: 'Error Occured ${e.toString()}');
       if (e is DioError) {
-        // Get.showSnackbar(GetSnackBar(title: e.response!.data["message"],));
-        print(e.response!.data["message"]);
+        showSnackBar(context: context, message: e.response!.data["message"]);
       }
     }
   }
@@ -125,7 +145,6 @@ class LoginPageController extends GetxController {
       }
     } catch (e) {
       if (e is DioError) {
-        // Get.showSnackbar(GetSnackBar(title: e.response!.data["message"],));
         print(e.response!.data["message"]);
       }
     }

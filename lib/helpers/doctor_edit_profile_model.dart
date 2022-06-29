@@ -10,10 +10,11 @@ class DoctorEditProfileModel {
   final String expertise;
   final String startingTime;
   final String finishingTime;
-  final List days;
+  final List<int> days;
   final int feeAmount;
   final bool isRequested;
   final String imagePath;
+  final bool isAdmin;
   // final File? image;
   DoctorEditProfileModel({
     required this.name,
@@ -29,5 +30,6 @@ class DoctorEditProfileModel {
     required this.feeAmount,
     required this.isRequested,
     required this.imagePath,
+    required this.isAdmin,
   });
 }

@@ -10,7 +10,7 @@ class DoctorLoginSerices {
       "password": password,
     };
     Response response = await dio
-        .post('https://onehealthhospital.site/api/doctor/login', data: data);
+        .post('https://onehealthhospital.online/api/doctor/login', data: data);
 
     return response;
   }

@@ -1,4 +1,6 @@
+import 'package:one_health_doctor_and_admin/constants/controller.dart';
 import 'package:one_health_doctor_and_admin/helpers/responsiveness.dart';
+import 'package:one_health_doctor_and_admin/widgets/admin_nav_bar.dart';
 import 'package:one_health_doctor_and_admin/widgets/large_screen.dart';
 import 'package:one_health_doctor_and_admin/widgets/side_menu.dart';
 import 'package:one_health_doctor_and_admin/widgets/small_screen.dart';
@@ -17,9 +19,11 @@ class SiteLayout extends StatelessWidget {
       drawer: const Drawer(
         child: SideMenu(),
       ),
-      appBar: topNavBar(context, scaffoldKey),
+      appBar: loginPageController.pageTitle.value == "Doctor"
+          ? topNavBar(context, scaffoldKey)
+          : adminTopNavBar(context, scaffoldKey),
       body: const ResponsiveWidget(
           largeScreen: LargeScreen(), smallScreen: SmallScreen()),
     );
   }
-}
+} 

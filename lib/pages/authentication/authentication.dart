@@ -12,7 +12,7 @@ class ConfirmLogoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: SizedBox(
-          width: 500,
+      width: 500,
       height: 200,
       child: Card(
           margin: const EdgeInsets.all(30),
@@ -25,7 +25,8 @@ class ConfirmLogoutPage extends StatelessWidget {
                 Flexible(
                   child: Text(
                     'Do You Really Want to Logout?',
-                    style: mainHeaderStyle.copyWith(color: Colors.black, fontSize: 25),
+                    style: mainHeaderStyle.copyWith(
+                        color: Colors.black, fontSize: 25),
                   ),
                 ),
                 Flexible(
@@ -37,11 +38,20 @@ class ConfirmLogoutPage extends StatelessWidget {
                             horizontal: 50.0, vertical: 10),
                         child: ElevatedButton(
                             onPressed: () {
-                              menuController
-                                  .changeActiveItemto(dashBoardPageView);
-                              navigationController.navigateUntil(
-                                  dashBoardPageView,
-                                  arguments: '');
+                              if (loginPageController.pageTitle.value ==
+                                  'Doctor') {
+                                menuController
+                                    .changeActiveItemto(dashBoardPageView);
+                                navigationController.navigateUntil(
+                                    dashBoardPageView,
+                                    arguments: '');
+                              } else {
+                                menuController
+                                    .changeActiveItemto(adminDashBoardPage);
+                                navigationController.navigateUntil(
+                                    adminDashBoardPage,
+                                    arguments: '');
+                              }
                             },
                             child: Text('CANCEL',
                                 style: normalTextStyle.copyWith(
@@ -54,6 +64,11 @@ class ConfirmLogoutPage extends StatelessWidget {
                             style:
                                 ElevatedButton.styleFrom(primary: Colors.red),
                             onPressed: () {
+                              menuController
+                                  .changeActiveItemto(dashBoardPageView);
+                              navigationController.navigateUntil(
+                                  dashBoardPageView,
+                                  arguments: '');
                               Get.offAll(LoginPage());
                             },
                             child: Text('LOGOUT',

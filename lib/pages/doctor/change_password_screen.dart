@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:one_health_doctor_and_admin/constants/controller.dart';
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
 import 'package:one_health_doctor_and_admin/widgets/custom_botton_one.dart';
 
 class DoctorChangePassword extends StatelessWidget {
-  const DoctorChangePassword({Key? key}) : super(key: key);
+  final dynamic map;
+  const DoctorChangePassword({
+    Key? key,
+    required this.map,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +61,13 @@ class DoctorChangePassword extends StatelessWidget {
                     text: 'Change Password',
                     onPressed: () {
                       if (newPassword == confirmPassword && newPassword != '') {
-                        passwordChangeController.doctorChangePassword(
-                            oldPassword, newPassword, context);
+                        if (map == '') {
+                          passwordChangeController.doctorChangePassword(
+                              oldPassword, newPassword, context);
+                        } else {
+                          passwordChangeController.adminChangePassword(
+                              oldPassword, newPassword, context);
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text('Please provide valid data')));

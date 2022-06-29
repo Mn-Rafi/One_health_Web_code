@@ -1,5 +1,5 @@
 class ApiUtilities {
-  static String baseUrl = 'https://onehealthhospital.site/api';
+  static String baseUrl = 'https://onehealthhospital.online/api';
   static String doctorLoginPath = '/doctor/login';
   static String adminLoginPath = '/admin/login';
   static String doctorRegisterPath = '/doctor';

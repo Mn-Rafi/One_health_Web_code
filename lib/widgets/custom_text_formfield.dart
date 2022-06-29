@@ -57,6 +57,7 @@ class CustomTextFormField extends StatelessWidget {
             style: BorderStyle.none,
           ),
         ),
+        labelText: hintText,
         hintText: hintText,
         filled: true,
         fillColor: Colors.white,
@@ -95,7 +96,6 @@ class CustomSmallTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       textInputAction: nextAction ?? TextInputAction.next,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: obscure,
       maxLength: 3,
       enabled: isEnabled ?? true,

@@ -50,11 +50,13 @@ class DashBoard extends StatelessWidget {
                                   ),
                                   Text(
                                     timeController.getdayNow(),
-                                    style: mainHeaderStyle.copyWith(fontSize: 18),
+                                    style:
+                                        mainHeaderStyle.copyWith(fontSize: 18),
                                   ),
                                   Text(
                                     timeController.getDateNow(),
-                                    style: mainHeaderStyle.copyWith(fontSize: 18),
+                                    style:
+                                        mainHeaderStyle.copyWith(fontSize: 18),
                                   ),
                                 ],
                               ),
@@ -73,6 +75,7 @@ class DashBoard extends StatelessWidget {
                                 child: Image.network(
                                   snapshot.data!.imagePath,
                                   width: 100,
+                                  fit: BoxFit.cover,
                                 )),
                           )
                         ],
@@ -115,7 +118,8 @@ class DashBoard extends StatelessWidget {
                           menuController
                               .changeActiveItemto(sideMenuitems[index + 1]);
                           navigationController.navigateTo(
-                              sideMenuitems[index + 1], arguments: '');
+                              sideMenuitems[index + 1],
+                              arguments: '');
                         },
                         child: Card(
                           color: lightGreyTwo,

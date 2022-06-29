@@ -53,7 +53,19 @@ class PatientsPage extends StatelessWidget {
                           return Center(
                             child: Text(
                               '${snapshot.error.toString()} occurred',
-                              style: TextStyle(fontSize: 18),
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          );
+                        }
+                        if (snapshot.data!.isEmpty) {
+                          return const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                'No Patients Found',
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.black),
+                              ),
                             ),
                           );
                         }
@@ -63,7 +75,6 @@ class PatientsPage extends StatelessWidget {
                                   color: Colors.black, width: 0.2),
                               children: List<TableRow>.generate(
                                   snapshot.data!.length, (index) {
-                                // final day = days[index];
                                 return TableRow(
                                   children: [
                                     Padding(

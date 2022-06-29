@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
@@ -23,14 +22,26 @@ class MenuController extends GetxController {
     switch (itemName) {
       case dashBoardPageView:
         return _customIcon(Icons.trending_up, itemName);
+      case adminDashBoardPage:
+        return _customIcon(Icons.trending_up, itemName);
       case patientsPageView:
         return _customIcon(Icons.people, itemName);
+      case adminPatientsPage:
+        return _customIcon(Icons.people, itemName);
       case appointmentsPageView:
+        return _customIcon(Icons.calendar_month, itemName);
+      case adminAppointmentsPage:
         return _customIcon(Icons.calendar_month, itemName);
       case profilePageView:
         return _customIcon(Icons.person, itemName);
       case authenticationPageView:
         return _customIcon(Icons.exit_to_app, itemName);
+      case adminDoctorsPage:
+        return _customIcon(Icons.medical_services_outlined, itemName);
+      case adminDepartmentsPage:
+        return _customIcon(Icons.category, itemName);
+      case adminProfilePage:
+        return _customIcon(Icons.admin_panel_settings_outlined, itemName);
       default:
         return _customIcon(Icons.exit_to_app, itemName);
     }

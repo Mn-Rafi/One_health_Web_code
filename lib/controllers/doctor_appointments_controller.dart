@@ -10,6 +10,7 @@ class DoctorAppointmentsController extends GetxController {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     DoctorAppointmetnsServices doctorAppointmetnsServices =
         DoctorAppointmetnsServices();
+    List<DoctorAppointmentDetailsModel> doctorAppointmentDetailsModelList = [];
     try {
       final response = await doctorAppointmetnsServices.getDoctorAppointments(
         id: preferences.getStringList('doctorProfile')![0],
@@ -31,7 +32,7 @@ class DoctorAppointmentsController extends GetxController {
         }
         print(
             '****************************************************************');
-        print(response.data['appointment'][0]);
+        print(doctorAppointmentDetailsModelList);
         print(
             '****************************************************************');
         yield doctorAppointmentDetailsModelList;

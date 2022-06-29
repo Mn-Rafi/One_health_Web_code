@@ -43,6 +43,7 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
   bool isFridaySelected = false;
   bool isSaturdaySelected = false;
   bool isSundaySelected = false;
+  late bool isAdmin;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -51,8 +52,8 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
     super.initState();
   }
 
-  List selectedDays() {
-    final List selectedDaysList = [];
+  List<int> selectedDays() {
+    final List<int> selectedDaysList = [];
     if (isSundaySelected) {
       selectedDaysList.add(1);
     }
@@ -108,6 +109,7 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                 widget.feeAmountController.text = snapshot.data!.fee.toString();
                 widget.daysController.text = snapshot.data!.days.toString();
                 widget.imageController.text = snapshot.data!.imagePath;
+                isAdmin = snapshot.data!.isAdmin;
                 if (snapshot.data!.days.contains(1)) {
                   isSundaySelected = true;
                 }
@@ -558,6 +560,7 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                                   if (_formKey.currentState!.validate()) {
                                     doctorProfileEditController.editProfile(
                                         DoctorEditProfileModel(
+                                            isAdmin: isAdmin,
                                             name: widget.nameController.text,
                                             email: widget.emailController.text,
                                             phoneNumber: widget
@@ -579,10 +582,9 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                                                 .feeAmountController.text),
                                             isRequested: true,
                                             imagePath:
-                                                widget.imageController.text
-                                            // image: widget.
-                                            ),
-                                        context);
+                                                widget.imageController.text),
+                                        context,
+                                        false);
                                   }
                                 },
                                 child: const CustomSubmitButton(
@@ -621,25 +623,3 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
     );
   }
 }
-
-// void registerDoctor(DoctorRegisterModel doctorRegisterModel) async {
-//   DoctorRegisterServices doctorRegisterServices = DoctorRegisterServices();
-//   try {
-//     final response = await doctorRegisterServices.registerUserResponse(
-//         doctorRegisterModel: doctorRegisterModel);
-//     if (response.statusCode == 200 || response.statusCode == 201) {
-//       print('Registered Succesfully');
-//       // Get.showSnackbar(GetSnackBar(title: "Logged In Succesfully"));
-//       Get.to(SiteLayout());
-//     } else {
-//       print('ERRORRRRRRR');
-//       throw DioError;
-//     }
-//   } catch (e) {
-//     if (e is DioError) {
-//       print('HEre it is printing error');
-//       // Get.showSnackbar(GetSnackBar(title: e.response!.data["message"],));
-//       print(e.response!.data["message"]);
-//     }
-//   }
-// }

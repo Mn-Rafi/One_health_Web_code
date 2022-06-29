@@ -7,8 +7,8 @@ import 'package:one_health_doctor_and_admin/widgets/side_menu_items.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SideMenu extends StatelessWidget {
-  const SideMenu({Key? key}) : super(key: key);
+class SideMenuAdmin extends StatelessWidget {
+  const SideMenuAdmin({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,16 +59,15 @@ class SideMenu extends StatelessWidget {
           ),
           Column(
             mainAxisSize: MainAxisSize.min,
-            children: sideMenuitems
-                .map((itemName) => SideMenuItem(
-                    itemName: itemName,
+            children: sideMenuitemsAdmin
+                .map((item) => SideMenuItem(
+                    itemName: item,
                     onTap: () {
-                      if (!menuController.isActive(itemName)) {
-                        menuController.changeActiveItemto(itemName);
+                      if (!menuController.isActive(item)) {
+                        menuController.changeActiveItemto(item);
 
                         if (ResponsiveWidget.isScreenSmall(context)) Get.back();
-                        navigationController.navigateTo(itemName,
-                            arguments: '');
+                        navigationController.navigateTo(item, arguments: '');
                       }
                     }))
                 .toList(),

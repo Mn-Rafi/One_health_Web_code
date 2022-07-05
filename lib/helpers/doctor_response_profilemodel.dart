@@ -1,41 +1,34 @@
-
-class DepartmentResponseModel {
-  final List<String>? departmentList;
-  final List<List<DoctorProfileModel>>? doctorsList;
-  DepartmentResponseModel({
-    this.departmentList,
-    this.doctorsList,
-  });
-}
-
-class DoctorProfileModel {
-  Doctor? doctor;
+class DoctorsProfileResponseModel {
+  List<DoctorModel>? doctor;
   String? message;
 
-  DoctorProfileModel({this.doctor, this.message});
+  DoctorsProfileResponseModel({this.doctor, this.message});
 
-  DoctorProfileModel.fromJson(Map<String, dynamic> json) {
-    doctor =
-        json['doctor'] != null ? new Doctor.fromJson(json['doctor']) : null;
+  DoctorsProfileResponseModel.fromJson(Map<String, dynamic> json) {
+    if (json['doctor'] != null) {
+      doctor = <DoctorModel>[];
+      json['doctor'].forEach((v) {
+        doctor!.add(DoctorModel.fromJson(v));
+      });
+    }
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (doctor != null) {
-      data['doctor'] = doctor!.toJson();
+      data['doctor'] = doctor!.map((v) => v.toJson()).toList();
     }
     data['message'] = message;
     return data;
   }
 }
 
-class Doctor {
+class DoctorModel {
   String? sId;
   String? name;
   String? email;
   String? department;
-  String? phone;
   String? qualification;
   String? expertise;
   String? experience;
@@ -51,14 +44,14 @@ class Doctor {
   String? createdAt;
   String? updatedAt;
   int? iV;
+  String? phone;
   bool? isDoctorSession;
 
-  Doctor(
+  DoctorModel(
       {this.sId,
       this.name,
       this.email,
       this.department,
-      this.phone,
       this.qualification,
       this.expertise,
       this.experience,
@@ -73,14 +66,15 @@ class Doctor {
       this.request,
       this.createdAt,
       this.updatedAt,
-      this.iV});
+      this.iV,
+      this.isDoctorSession,
+      this.phone});
 
-  Doctor.fromJson(Map<String, dynamic> json) {
+  DoctorModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     name = json['name'];
     email = json['email'];
     department = json['department'];
-    phone = json['phone'];
     qualification = json['qualification'];
     expertise = json['expertise'];
     experience = json['experience'];
@@ -96,7 +90,8 @@ class Doctor {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     iV = json['__v'];
-    isDoctorSession = null;
+    phone = json['phone'];
+    isDoctorSession = true;
   }
 
   Map<String, dynamic> toJson() {
@@ -105,7 +100,6 @@ class Doctor {
     data['name'] = name;
     data['email'] = email;
     data['department'] = department;
-    data['phone'] = phone;
     data['qualification'] = qualification;
     data['expertise'] = expertise;
     data['experience'] = experience;
@@ -121,6 +115,7 @@ class Doctor {
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     data['__v'] = iV;
+    data['phone'] = phone;
     return data;
   }
 }

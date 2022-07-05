@@ -54,7 +54,66 @@ class AdminDepartment extends StatelessWidget with TextFieldValidator {
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Container(
+                              InkWell(
+                                onTap: () {
+                                  _adminDepartmetnServices
+                                      .editDepartment(
+                                          _adminDepartmetnServices
+                                              .departmentsIdList[index],
+                                          'General')
+                                      .then((value) {
+                                    if (value) {
+                                      ScaffoldMessenger.of(context)
+                                          .removeCurrentSnackBar();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'Department Edited Succesfully'),
+                                        ),
+                                      );
+                                      navigationController.navigateTo(
+                                          adminDepartmentsPage,
+                                          arguments: '');
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: Colors.red,
+                                    ),
+                                    width: 50,
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(4.0),
+                                      child:
+                                          Icon(Icons.edit, color: Colors.black),
+                                    )),
+                              ),
+                              const SizedBox(width: 10),
+                              InkWell(
+                                onTap: () {
+                                  _adminDepartmetnServices
+                                      .deleteDepartment(_adminDepartmetnServices
+                                          .departmentsIdList[index])
+                                      .then((value) {
+                                    if (value) {
+                                      ScaffoldMessenger.of(context)
+                                          .removeCurrentSnackBar();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                              'Department Deleted Succesfully'),
+                                        ),
+                                      );
+                                      navigationController.navigateTo(
+                                          adminDepartmentsPage,
+                                          arguments: '');
+                                    }
+                                  });
+                                },
+                                child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     color: Colors.red,
@@ -62,21 +121,10 @@ class AdminDepartment extends StatelessWidget with TextFieldValidator {
                                   width: 50,
                                   child: const Padding(
                                     padding: EdgeInsets.all(4.0),
-                                    child:
-                                        Icon(Icons.edit, color: Colors.black),
-                                  )),
-                              const SizedBox(width: 10),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.red,
-                                ),
-                                width: 50,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(4.0),
-                                  child: Icon(
-                                    Icons.delete,
-                                    color: Colors.black,
+                                    child: Icon(
+                                      Icons.delete,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -88,7 +136,10 @@ class AdminDepartment extends StatelessWidget with TextFieldValidator {
                                     onTap: () {
                                       navigationController.navigateTo(
                                           adminDoctorProfileViewPage,
-                                          arguments: '');
+                                          arguments: snapshot
+                                              .data!
+                                              .doctorsList![index][indx]
+                                              .doctor!);
                                     },
                                     child: Text(
                                       snapshot.data!.doctorsList![index][indx]
@@ -157,7 +208,30 @@ class AdminDepartment extends StatelessWidget with TextFieldValidator {
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: CustomButtonOne(
                       onPressed: () {
-                        
+                        if (_departmentNameController.text.isNotEmpty) {
+                          _adminDepartmetnServices
+                              .addDepartment(_departmentNameController.text)
+                              .then((value) {
+                            if (value) {
+                              ScaffoldMessenger.of(context)
+                                  .removeCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Department Added Succesfully'),
+                                ),
+                              );
+                              navigationController.navigateTo(
+                                  adminDepartmentsPage,
+                                  arguments: '');
+                            }
+                          });
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Please enter department name'),
+                            duration: Duration(seconds: 2),
+                          ));
+                        }
                       },
                       text: 'Add Department',
                     ),

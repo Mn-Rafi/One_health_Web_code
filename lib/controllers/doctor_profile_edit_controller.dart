@@ -12,21 +12,23 @@ class DoctorProfileEditController extends GetxController {
   static DoctorProfileEditController instance = Get.find();
   editProfile(DoctorEditProfileModel doctorEditProfileModel,
       BuildContext context, bool isAdmin) async {
+    print('**********************************1');
     SharedPreferences preferences = await SharedPreferences.getInstance();
     EditDoctorProfileServise editDoctorProfileServise =
         EditDoctorProfileServise();
     try {
+      print('**********************************2');
       final response = await editDoctorProfileServise.editDoctorProfile(
         doctorEditProfileModel: doctorEditProfileModel,
-        id: preferences.getStringList('doctorProfile')![0],
-        token: isAdmin
-            ? preferences.getStringList('adminProfile')![1]
-            : preferences.getStringList('doctorProfile')![1],
+        id: doctorEditProfileModel.id,
+        token: preferences.getStringList('adminProfile')![1],
       );
       if (response.statusCode == 200 ||
           response.statusCode == 201 ||
           response.statusCode == 204) {
-        navigationController.navigateTo(profilePageView, arguments: '');
+        print('**********************************7');
+        menuController.changeActiveItemto(adminProfilePage);
+        navigationController.navigateTo(adminProfilePage, arguments: '');
       } else {
         throw DioError;
       }

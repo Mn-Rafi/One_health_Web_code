@@ -123,6 +123,8 @@ class AdminProfile extends StatelessWidget {
                                               if (snapshot.data!.department !=
                                                   null)
                                                 Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
@@ -368,60 +370,62 @@ class AdminProfile extends StatelessWidget {
                                                   Spacer(),
                                                   CustomButtonOne(
                                                       onPressed: () {
-                                                        doctorProfileEditController.editProfile(
-                                                            DoctorEditProfileModel(
-                                                                isAdmin: false,
-                                                                name: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .name,
-                                                                email: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .email,
-                                                                phoneNumber: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .email,
-                                                                qualification: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .qualification!,
-                                                                department: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .department!,
-                                                                experience: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .experience!,
-                                                                expertise: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .areaOfExpertise!,
-                                                                startingTime: snapshot
-                                                                    .data![
-                                                                        index]
-                                                                    .opTimeStart!,
-                                                                finishingTime: snapshot
+                                                        print(
+                                                            'Delete Admin');
+                                                        doctorProfileEditController
+                                                            .editProfile(
+                                                          DoctorEditProfileModel(
+                                                            id: snapshot
+                                                                .data![index]
+                                                                .id,
+                                                            isAdmin: false,
+                                                            name: snapshot
+                                                                .data![index]
+                                                                .name,
+                                                            email: snapshot
+                                                                .data![index]
+                                                                .email,
+                                                            phoneNumber: snapshot
+                                                                .data![index]
+                                                                .phoneNumber!,
+                                                            qualification: snapshot
+                                                                .data![index]
+                                                                .qualification!,
+                                                            department: snapshot
+                                                                .data![index]
+                                                                .department!,
+                                                            experience: snapshot
+                                                                .data![index]
+                                                                .experience!,
+                                                            expertise: snapshot
+                                                                .data![index]
+                                                                .areaOfExpertise!,
+                                                            startingTime: snapshot
+                                                                .data![index]
+                                                                .opTimeStart!,
+                                                            finishingTime:
+                                                                snapshot
                                                                     .data![
                                                                         index]
                                                                     .opTimeEnd!,
-                                                                days: snapshot
+                                                            days: snapshot
+                                                                .data![index]
+                                                                .days!
+                                                                .cast<int>(),
+                                                            feeAmount: int
+                                                                .parse(snapshot
                                                                     .data![
                                                                         index]
-                                                                    .days!,
-                                                                feeAmount: int.parse(
-                                                                    snapshot
-                                                                        .data![
-                                                                            index]
-                                                                        .fee!),
-                                                                isRequested:
-                                                                    true,
-                                                                imagePath: snapshot
-                                                                    .data![index]
-                                                                    .imagePath!),
-                                                            context, true);
+                                                                    .fee!
+                                                                    .toString()),
+                                                            isRequested: true,
+                                                            imagePath: snapshot
+                                                                .data![index]
+                                                                .imagePath!,
+                                                          ),
+                                                          context,
+                                                          true,
+                                                        );
                                                       },
                                                       text:
                                                           'REMOVE ADMIN ACCESS')

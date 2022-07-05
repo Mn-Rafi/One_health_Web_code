@@ -6,6 +6,7 @@ class EditDoctorProfileServise {
       {required DoctorEditProfileModel doctorEditProfileModel,
       required String id,
       required String token}) async {
+    print('**********************************3');
     Dio dio = Dio();
     var formData = {
       "name": doctorEditProfileModel.name,
@@ -20,17 +21,17 @@ class EditDoctorProfileServise {
       "fee": doctorEditProfileModel.feeAmount,
       "admin": doctorEditProfileModel.isAdmin,
       "image": doctorEditProfileModel.imagePath,
-      "active": true,
+      "active": doctorEditProfileModel.isActive ?? true,
       "request": false,
     };
-    print(doctorEditProfileModel.isAdmin.toString() + '===========================');
     Response response = await dio
         .put('https://onehealthhospital.online/api/doctor/$id',
             data: formData,
             options: Options(headers: {
               "auth-token": token,
             }))
-        .timeout(const Duration(seconds: 5));
+        .timeout(const Duration(seconds: 10));
+    print('**********************************4');
     return response;
   }
 }

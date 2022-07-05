@@ -581,6 +581,7 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                                             feeAmount: int.parse(widget
                                                 .feeAmountController.text),
                                             isRequested: true,
+                                            id: '',
                                             imagePath:
                                                 widget.imageController.text),
                                         context,

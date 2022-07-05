@@ -48,7 +48,7 @@ class ProfileController extends GetxController {
     return null;
   }
 
-  Future<AdminProfileModel?> adminProfileResponse() async {
+  Future<AdminProfileModel?>? adminProfileResponse() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     AdminProfileServices adminProfileServices = AdminProfileServices();
     AdminProfileModel? adminProfileModel;

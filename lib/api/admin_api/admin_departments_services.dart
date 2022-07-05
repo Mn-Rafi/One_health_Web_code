@@ -3,15 +3,23 @@ import 'package:one_health_doctor_and_admin/helpers/admin_department_response_mo
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminDepartmetnServices {
+  final List<String> departmentsIdList = [];
   Future<DepartmentResponseModel?> getDepartmentList() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    final token = preferences.getStringList('adminProfile')![1];
-    // final doctorToken = preferences.getStringList('doctorProfile')![1];
+    String? token;
+    String? doctorToken;
+
+    try {
+      token = preferences.getStringList('adminProfile')![1];
+      doctorToken = preferences.getStringList('doctorProfile')![1];
+    } catch (e) {
+      print(e);
+    }
     List<String>? departmentList = [];
     List<List<DoctorProfileModel>>? doctorProfileModelList = [];
     Dio dio = Dio();
     final data = {
-      "auth-token": token,
+      "auth-token": token ?? doctorToken,
     };
 
     try {
@@ -21,17 +29,13 @@ class AdminDepartmetnServices {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         for (int i = 0; i < response.data['department'].length; i++) {
+          departmentsIdList.add(response.data['department'][i]['_id']);
           departmentList.add(response.data['department'][i]['name']);
-          // doctorsList.add(response.data['department'][i]['doctors']);
           List<DoctorProfileModel>? doctorsList = [];
           for (int j = 0;
               j < response.data['department'][i]['doctors'].length;
               j++) {
             DoctorProfileModel? doctorProfileModel;
-            print('================================');
-            print(
-                'https://onehealthhospital.online/api/doctor/${response.data['department'][i]['doctors'][j]}');
-            print('================================');
             try {
               final doctorResponse = await dio.get(
                 'https://onehealthhospital.online/api/doctor/${response.data['department'][i]['doctors'][j]}',
@@ -39,12 +43,9 @@ class AdminDepartmetnServices {
               );
               if (doctorResponse.statusCode == 200 ||
                   doctorResponse.statusCode == 201) {
-                print('Starteddddddddddddddd');
-                print(response.data['name']);
                 doctorProfileModel =
                     DoctorProfileModel.fromJson(doctorResponse.data);
                 doctorsList.add(doctorProfileModel);
-                print('endddddddddddddddd');
               } else {
                 throw DioError;
               }
@@ -56,17 +57,10 @@ class AdminDepartmetnServices {
           }
           doctorProfileModelList.add(doctorsList);
         }
-        // response.data['department'][i]['doctors'].toString().split(',')
-        print('*******************************');
-        print(doctorProfileModelList);
-        print('*******************************');
-        // try{
-
-        // }
         return DepartmentResponseModel(
-            departmentList: departmentList, doctorsList: doctorProfileModelList
-            // doctorsList.map((e) => e.toString().split(',')).toList(),
-            );
+          departmentList: departmentList,
+          doctorsList: doctorProfileModelList,
+        );
       } else {
         throw DioError;
       }
@@ -76,5 +70,119 @@ class AdminDepartmetnServices {
       }
     }
     return null;
+  }
+
+  Future<bool> addDepartment(String departmentName) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? token;
+    String? doctorToken;
+
+    try {
+      token = preferences.getStringList('adminProfile')![1];
+      doctorToken = preferences.getStringList('doctorProfile')![1];
+    } catch (e) {
+      print(e);
+    }
+
+    Dio dio = Dio();
+    final data = {
+      "auth-token": token ?? doctorToken,
+    };
+
+    try {
+      final response = await dio.post(
+        'https://onehealthhospital.online/api/department/',
+        options: Options(headers: data),
+        data: {
+          "name": departmentName,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print(response.data);
+        return true;
+      } else {
+        throw DioError;
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.response!.data['message']);
+      }
+    }
+    return false;
+  }
+
+  Future<bool> deleteDepartment(String departmentId) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? token;
+    String? doctorToken;
+
+    try {
+      token = preferences.getStringList('adminProfile')![1];
+      doctorToken = preferences.getStringList('doctorProfile')![1];
+    } catch (e) {
+      print(e);
+    }
+
+    Dio dio = Dio();
+    final data = {
+      "auth-token": token ?? doctorToken,
+    };
+    try {
+      final response = await dio.delete(
+        'https://onehealthhospital.online/api/department/$departmentId',
+        options: Options(headers: data),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print(response.data);
+        return true;
+      } else {
+        throw DioError;
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.response!.data['message']);
+      }
+    }
+    return false;
+  }
+
+  Future<bool> editDepartment(
+      String departmentId, String departmentName) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? token;
+    String? doctorToken;
+
+    try {
+      token = preferences.getStringList('adminProfile')![1];
+      doctorToken = preferences.getStringList('doctorProfile')![1];
+    } catch (e) {
+      print(e);
+    }
+
+    Dio dio = Dio();
+    final data = {
+      "auth-token": token ?? doctorToken,
+    };
+    try {
+      final response = await dio.put(
+        'https://onehealthhospital.online/api/department/$departmentId',
+        data: {"name": departmentName},
+        options: Options(headers: data),
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print('HELOOOOOOOOOOOOOOOOOOOOO');
+        print(response.data);
+        print('HELOOOOOOOOOOOOOOOOOOOOO');
+
+        return true;
+      } else {
+        throw DioError;
+      }
+    } catch (e) {
+      if (e is DioError) {
+        print(e.response!.data['message']);
+      }
+    }
+    return false;
   }
 }

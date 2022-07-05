@@ -1,6 +1,11 @@
+import 'package:one_health_doctor_and_admin/helpers/admin_department_response_model.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_appoinments/admin_appoinments.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_dashboard/admin_dashboard.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_departments/admin_departments.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_doctors/admin_doctors.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_doctors/doctors_profile.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_patients/admin_patients.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_patients/admin_patients_profile.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_profile/admin_profile.dart';
 import 'package:one_health_doctor_and_admin/pages/appointments/appointments.dart';
 import 'package:one_health_doctor_and_admin/pages/authentication/authentication.dart';
@@ -19,11 +24,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case adminDashBoardPage:
       return _getPageRoute(const AdminDashboard());
     case adminAppointmentsPage:
-      return _getPageRoute(const AdminDashboard());
+      return _getPageRoute(AdminAppoinments());
     case adminPatientsPage:
-      return _getPageRoute(const AdminDashboard());
+      return _getPageRoute(AdminPatientsPage());
     case adminDoctorsPage:
-      return _getPageRoute(const AdminDashboard());
+      return _getPageRoute(AdminDoctorsPage());
     case adminDepartmentsPage:
       return _getPageRoute(AdminDepartment());
     case adminProfilePage:
@@ -41,7 +46,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         map: settings.arguments,
       ));
     case adminDoctorProfileViewPage:
-      return _getPageRoute(const DoctorProfileAdminSide());
+      return _getPageRoute(DoctorProfileAdminSide(doctor: settings.arguments));
+    case adminPatientProfileViewPage:
+      return _getPageRoute(PatientProfileAdminSide(
+        patient: settings.arguments,
+      ));
     case prescribeMedicinePage:
       return _getPageRoute(PrescribeMedicine(
         arguments: settings.arguments,

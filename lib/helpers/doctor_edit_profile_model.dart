@@ -1,7 +1,9 @@
 
 
 class DoctorEditProfileModel {
+  final bool? isActive;
   final String name;
+  final String id;
   final String email;
   final String phoneNumber;
   final String qualification;
@@ -10,14 +12,16 @@ class DoctorEditProfileModel {
   final String expertise;
   final String startingTime;
   final String finishingTime;
-  final List<int> days;
+  final List<int>   days;
   final int feeAmount;
-  final bool isRequested;
+  final bool? isRequested;
   final String imagePath;
   final bool isAdmin;
   // final File? image;
   DoctorEditProfileModel({
+    this.isActive,
     required this.name,
+    required this.id,
     required this.email,
     required this.phoneNumber,
     required this.qualification,

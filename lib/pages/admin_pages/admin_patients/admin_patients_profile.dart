@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:one_health_doctor_and_admin/api/admin_api/admin_doctor_profile_services.dart';
+import 'package:one_health_doctor_and_admin/api/admin_api/admin_patients_services.dart';
 import 'package:one_health_doctor_and_admin/constants/controller.dart';
 
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
-import 'package:one_health_doctor_and_admin/helpers/doctor_edit_profile_model.dart';
 import 'package:one_health_doctor_and_admin/routing/routes.dart';
 import 'package:one_health_doctor_and_admin/widgets/custom_botton_one.dart';
 
-class DoctorProfileAdminSide extends StatelessWidget {
-  final dynamic doctor;
-  DoctorProfileAdminSide({
+class PatientProfileAdminSide extends StatelessWidget {
+  final dynamic patient;
+  PatientProfileAdminSide({
     Key? key,
-    required this.doctor,
+    required this.patient,
   }) : super(key: key);
 
-  final AdminDoctorProfileServices _adminDoctorProfileServices =
-      AdminDoctorProfileServices();
+  final AdminPatientServices _adminPatientsProfileServices =
+      AdminPatientServices();
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 50),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(50),
+          child: SizedBox(
+            width: 600,
             child: Card(
                 color: lightGreyTwo,
                 child: Padding(
@@ -35,7 +35,7 @@ class DoctorProfileAdminSide extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
                             child: Image.network(
-                              doctor.image,
+                              patient.image,
                               width: 200,
                             ),
                           ),
@@ -56,7 +56,7 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          doctor.name,
+                                          patient.firstName.toString(),
                                           style: normalTextStyle,
                                         )
                                       ],
@@ -74,7 +74,7 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          doctor.sId,
+                                          patient.sId.toString(),
                                           style: normalTextStyle,
                                         )
                                       ],
@@ -92,7 +92,7 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                           ),
                                         ),
                                         Text(
-                                          doctor.email,
+                                          patient.email.toString(),
                                           style: normalTextStyle,
                                         )
                                       ],
@@ -109,13 +109,13 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                'Qualification : ',
+                                                'Age : ',
                                                 style: mainHeaderStyle.copyWith(
                                                     fontSize: 14),
                                               ),
                                             ),
                                             Text(
-                                              doctor.qualification,
+                                              patient.age.toString(),
                                               style: normalTextStyle,
                                             )
                                           ],
@@ -128,13 +128,13 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                'Experience : ',
+                                                'Gender : ',
                                                 style: mainHeaderStyle.copyWith(
                                                     fontSize: 14),
                                               ),
                                             ),
                                             Text(
-                                              doctor.experience,
+                                              patient.gender.toString(),
                                               style: normalTextStyle,
                                             )
                                           ],
@@ -147,13 +147,13 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                'Department : ',
+                                                'Mobile : ',
                                                 style: mainHeaderStyle.copyWith(
                                                     fontSize: 14),
                                               ),
                                             ),
                                             Text(
-                                              doctor.department,
+                                              patient.phone.toString(),
                                               style: normalTextStyle,
                                             )
                                           ],
@@ -166,32 +166,13 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
-                                                'Area of expertise : ',
+                                                'Blood Group : ',
                                                 style: mainHeaderStyle.copyWith(
                                                     fontSize: 14),
                                               ),
                                             ),
                                             Text(
-                                              doctor.expertise,
-                                              style: normalTextStyle,
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                'OP Time : ',
-                                                style: mainHeaderStyle.copyWith(
-                                                    fontSize: 14),
-                                              ),
-                                            ),
-                                            Text(
-                                              '${doctor.startTime} to ${doctor.endTime}',
+                                              patient.blood.toString(),
                                               style: normalTextStyle,
                                             )
                                           ],
@@ -207,7 +188,7 @@ class DoctorProfileAdminSide extends StatelessWidget {
                             height: 20,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               CustomButtonOne(
                                   onPressed: () {
@@ -215,132 +196,74 @@ class DoctorProfileAdminSide extends StatelessWidget {
                                   },
                                   text: 'Appointments'),
                               CustomButtonOne(
-                                color: doctor.active ? null : Colors.grey,
+                                color: patient.access ? null : Colors.grey,
                                 onPressed: () async {
-                                  await doctorProfileEditController.editProfile(
-                                    DoctorEditProfileModel(
-                                      isActive: !(doctor.active),
-                                      id: doctor.sId,
-                                      isAdmin: doctor.admin,
-                                      name: doctor.name,
-                                      email: doctor.email,
-                                      phoneNumber: doctor.phone!,
-                                      qualification: doctor.qualification!,
-                                      department: doctor.department!,
-                                      experience: doctor.experience!,
-                                      expertise: doctor.expertise!,
-                                      startingTime: doctor.startTime!,
-                                      finishingTime: doctor.endTime!,
-                                      days: doctor.days!.cast<int>(),
-                                      feeAmount:
-                                          int.parse(doctor.fee!.toString()),
-                                      isRequested: true,
-                                      imagePath: doctor.image!,
-                                    ),
-                                    context,
-                                    true,
-                                  );
-
-                                  if (doctor.isDoctorSession == null) {
-                                    menuController.changeActiveItemto(
-                                        adminDepartmentsPage);
-                                    navigationController.navigateTo(
-                                        adminDepartmentsPage,
-                                        arguments: '');
-                                  } else {
-                                    menuController
-                                        .changeActiveItemto(adminDoctorsPage);
-                                    navigationController.navigateTo(
-                                        adminDoctorsPage,
-                                        arguments: '');
-                                  }
-                                  print('Set Inactive');
-                                },
-                                text: doctor.active
-                                    ? 'Set Inactive'
-                                    : 'Set Active',
-                              ),
-                              CustomButtonOne(
-                                  color: doctor.admin ? Colors.red : null,
-                                  onPressed: () {
-                                    print('Remove Admin Access');
-                                    doctorProfileEditController.editProfile(
-                                      DoctorEditProfileModel(
-                                        isActive: doctor.active,
-                                        id: doctor.sId,
-                                        isAdmin: doctor.admin ? false : true,
-                                        name: doctor.name,
-                                        email: doctor.email,
-                                        phoneNumber: doctor.phone!,
-                                        qualification: doctor.qualification!,
-                                        department: doctor.department!,
-                                        experience: doctor.experience!,
-                                        expertise: doctor.expertise!,
-                                        startingTime: doctor.startTime!,
-                                        finishingTime: doctor.endTime!,
-                                        days: doctor.days!.cast<int>(),
-                                        feeAmount:
-                                            int.parse(doctor.fee!.toString()),
-                                        isRequested: true,
-                                        imagePath: doctor.image!,
-                                      ),
-                                      context,
-                                      true,
-                                    );
-                                    if (doctor.isDoctorSession == null) {
-                                      menuController.changeActiveItemto(
-                                          adminDepartmentsPage);
+                                  _adminPatientsProfileServices
+                                      .blockUser(user: patient)
+                                      .then((value) {
+                                    if (value) {
+                                      print(patient.access);
+                                      if (patient.access == false) {
+                                        ScaffoldMessenger.of(context)
+                                            .removeCurrentSnackBar();
+                                        showSnackBar(
+                                            context: context,
+                                            message: 'User Blocked');
+                                        print('User Blocked');
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .removeCurrentSnackBar();
+                                        showSnackBar(
+                                            context: context,
+                                            message: 'User Unblocked');
+                                        print('User UnBlocked');
+                                      }
                                       navigationController.navigateTo(
-                                          adminDepartmentsPage,
-                                          arguments: '');
-                                    } else {
-                                      menuController
-                                          .changeActiveItemto(adminDoctorsPage);
-                                      navigationController.navigateTo(
-                                          adminDoctorsPage,
+                                          adminPatientsPage,
                                           arguments: '');
                                     }
-                                  },
-                                  text: doctor.admin
-                                      ? 'Remove Admin Access'
-                                      : 'Make Admin'),
+                                  });
+                                  print('Set Inactive');
+                                },
+                                text: patient.access
+                                    ? 'Block User'
+                                    : 'Unblock User',
+                              ),
                               CustomButtonOne(
                                   onPressed: () {
-                                    _adminDoctorProfileServices
-                                        .removeDoctor(
-                                            id: doctor.sId,
-                                            check: doctor.isDoctorSession)
+                                    _adminPatientsProfileServices
+                                        .removeUser(userId: patient.sId)
                                         .then((value) {
                                       if (value) {
                                         ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    'Doctor Removed Successfully')));
+                                            .removeCurrentSnackBar();
+                                        showSnackBar(
+                                            context: context,
+                                            message:
+                                                'User Removed Successfully');
+                                        print('User Removed');
+
+                                        navigationController.navigateTo(
+                                            adminPatientsPage,
+                                            arguments: '');
                                       }
                                     });
-                                    print('Remove Doctor');
+                                    print('Remove User');
                                   },
-                                  text: 'Remove Doctor'),
+                                  text: 'Remove'),
                             ],
                           ),
                         ],
                       ),
                     ]))),
           ),
-          CustomButtonOne(
-              onPressed: () {
-                print('Go Back');
-                if (doctor.isDoctorSession != null) {
-                  navigationController.navigateTo(adminDoctorsPage,
-                      arguments: '');
-                } else {
-                  navigationController.navigateTo(adminDepartmentsPage,
-                      arguments: '');
-                }
-              },
-              text: 'Go Back'),
-        ],
-      ),
+        ),
+        CustomButtonOne(
+            onPressed: () {
+              navigationController.navigateTo(adminPatientsPage, arguments: '');
+            },
+            text: 'Go Back'),
+      ],
     );
   }
 }

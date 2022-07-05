@@ -16,6 +16,8 @@ const adminDepartmentsPage = 'Departments List';
 const adminProfilePage = 'Admin Profile';
 const adminDoctorProfileViewPage = 'Admin Doctor Profile';
 
+const adminPatientProfileViewPage = 'Admin Patient Profile';
+
 List sideMenuitems = [
   dashBoardPageView,
   patientsPageView,

@@ -33,6 +33,7 @@ class AdminProfileModel {
   final String id;
   final String name;
   final String email;
+  final String? phoneNumber;
   final String? ismainAdmin;
   final String? imagePath;
   final String? qualification;
@@ -41,12 +42,13 @@ class AdminProfileModel {
   final String? areaOfExpertise;
   final String? opTimeStart;
   final String? opTimeEnd;
-  final List<int>? days;
+  final List<dynamic>? days;
   final String? fee;
   AdminProfileModel({
     required this.id,
     required this.name,
     required this.email,
+    this.phoneNumber,
     this.ismainAdmin,
     required this.imagePath,
     this.qualification,

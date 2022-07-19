@@ -10,7 +10,7 @@ class AdminAppoinmentServices {
     final token = preferences.getStringList('adminProfile')![1];
     try {
       final response = await dio.get(
-        'https://onehealthhospital.site/api/appointment/$link',
+        'https://onehealthhospital.online/api/appointment/$link',
         options: Options(headers: {
           'auth-token': token,
         }),
@@ -40,7 +40,7 @@ class AdminAppoinmentServices {
     final token = preferences.getStringList('adminProfile')![1];
     try {
       final response = await dio.put(
-        'https://onehealthhospital.site/api/appointment/status/$id',
+        'https://onehealthhospital.online/api/appointment/status/$id',
         data: {
           'status': status,
         },
@@ -68,7 +68,7 @@ class AdminAppoinmentServices {
     final token = preferences.getStringList('adminProfile')![1];
     try {
       final response = await dio.delete(
-        'https://onehealthhospital.site/api/appointment/$id',
+        'https://onehealthhospital.online/api/appointment/$id',
         options: Options(headers: {
           'auth-token': token,
         }),

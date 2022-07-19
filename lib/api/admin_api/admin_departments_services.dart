@@ -24,7 +24,7 @@ class AdminDepartmetnServices {
 
     try {
       final response = await dio.get(
-        'https://onehealthhospital.site/api/department/',
+        'https://onehealthhospital.online/api/department/',
         options: Options(headers: data),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -38,7 +38,7 @@ class AdminDepartmetnServices {
             DoctorProfileModel? doctorProfileModel;
             try {
               final doctorResponse = await dio.get(
-                'https://onehealthhospital.site/api/doctor/${response.data['department'][i]['doctors'][j]}',
+                'https://onehealthhospital.online/api/doctor/${response.data['department'][i]['doctors'][j]}',
                 options: Options(headers: data),
               );
               if (doctorResponse.statusCode == 200 ||
@@ -91,7 +91,7 @@ class AdminDepartmetnServices {
 
     try {
       final response = await dio.post(
-        'https://onehealthhospital.site/api/department/',
+        'https://onehealthhospital.online/api/department/',
         options: Options(headers: data),
         data: {
           "name": departmentName,
@@ -129,7 +129,7 @@ class AdminDepartmetnServices {
     };
     try {
       final response = await dio.delete(
-        'https://onehealthhospital.site/api/department/$departmentId',
+        'https://onehealthhospital.online/api/department/$departmentId',
         options: Options(headers: data),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -165,7 +165,7 @@ class AdminDepartmetnServices {
     };
     try {
       final response = await dio.put(
-        'https://onehealthhospital.site/api/department/$departmentId',
+        'https://onehealthhospital.online/api/department/$departmentId',
         data: {"name": departmentName},
         options: Options(headers: data),
       );

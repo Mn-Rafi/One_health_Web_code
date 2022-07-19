@@ -9,7 +9,7 @@ class DoctorProfileServices {
     };
 
     Response response = await dio.get(
-        'https://onehealthhospital.site/api/doctor/$id',
+        'https://onehealthhospital.online/api/doctor/$id',
         options: Options(headers: data));
 
     return response;
@@ -24,7 +24,7 @@ class AdminProfileServices {
     };
 
     Response response = await dio.get(
-        'https://onehealthhospital.site/api/admin/',
+        'https://onehealthhospital.online/api/admin/',
         options: Options(headers: data));
 
     return response;
@@ -36,7 +36,7 @@ class AdminProfileServices {
     };
 
     Response response = await dio.get(
-        'https://onehealthhospital.site/api/doctor/$id',
+        'https://onehealthhospital.online/api/doctor/$id',
         options: Options(headers: data));
 
     return response;

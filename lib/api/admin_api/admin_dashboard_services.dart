@@ -12,7 +12,7 @@ class AdminDashBoardServices {
     };
     try {
       Response response = await dio.get(
-          'https://onehealthhospital.site/api/chart/card',
+          'https://onehealthhospital.online/api/chart/card',
           options: Options(headers: data));
       if (response.statusCode == 200 || response.statusCode == 201) {
         DoctorAndUserCardModel doctorAndUserCardModel =
@@ -41,7 +41,7 @@ class AdminDashBoardServices {
     };
     try {
       Response response = await dio.get(
-          'https://onehealthhospital.site/api/chart/bar',
+          'https://onehealthhospital.online/api/chart/bar',
           options: Options(headers: data));
       if (response.statusCode == 200 || response.statusCode == 201) {
         AmountandDateChartModel amountandDateChartModel =
@@ -76,7 +76,7 @@ class AdminDashBoardServices {
     };
     try {
       Response response = await dio.get(
-          'https://onehealthhospital.site/api/chart/pie',
+          'https://onehealthhospital.online/api/chart/pie',
           options: Options(headers: data));
       if (response.statusCode == 200 || response.statusCode == 201) {
         AppointmentStatusChartModel appointmentchartmdelList =

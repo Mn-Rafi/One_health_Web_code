@@ -29,7 +29,7 @@ class EditDoctorProfileServise {
       "request": false,
     });
     Response response = await dio
-        .put('https://onehealthhospital.site/api/doctor/$id',
+        .put('https://onehealthhospital.online/api/doctor/$id',
             data: formData,
             options: Options(headers: {
               "auth-token": token,

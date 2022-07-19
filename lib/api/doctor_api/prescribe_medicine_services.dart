@@ -9,7 +9,7 @@ class PrescribeMedicineServices {
       "auth-token": token,
     };
     Response response = await dio.get(
-        'https://onehealthhospital.site/api/prescription/$id',
+        'https://onehealthhospital.online/api/prescription/$id',
         options: Options(headers: formData));
     print(response.data);
     return response;
@@ -42,7 +42,7 @@ class PrescribeMedicineServices {
     print('again trying here 1');
     var header = {"auth-token": token};
     final response = await dio.post(
-        'https://onehealthhospital.site/api/prescription',
+        'https://onehealthhospital.online/api/prescription',
         data: formData,
         options: Options(headers: header));
     print('again trying here returned');

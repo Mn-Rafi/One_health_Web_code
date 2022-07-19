@@ -14,7 +14,7 @@ class AdminaccessServices {
     };
     try {
       Response response = await dio.get(
-          'https://onehealthhospital.site/api/admin/admins/',
+          'https://onehealthhospital.online/api/admin/admins/',
           options: Options(headers: data));
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');

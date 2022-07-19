@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:one_health_doctor_and_admin/api/api_utilities.dart';
 
@@ -10,8 +12,8 @@ class DoctorLoginSerices {
       "password": password,
     };
     Response response = await dio
-        .post('https://onehealthhospital.online/api/doctor/login', data: data);
-
+        .post('https://onehealthhospital.site/api/doctor/login', data: data);
+    log(response.toString());
     return response;
   }
 

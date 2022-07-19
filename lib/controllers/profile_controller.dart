@@ -4,6 +4,8 @@ import 'package:one_health_doctor_and_admin/api/doctor_api/doctor_profile_servic
 import 'package:one_health_doctor_and_admin/helpers/doctor_profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+String? doctorName;
+
 class ProfileController extends GetxController {
   static ProfileController instance = Get.find();
   DoctorProfileModel? doctorProfileModel;
@@ -18,6 +20,7 @@ class ProfileController extends GetxController {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        doctorName = response.data['doctor']['name'];
         doctorProfileModel = DoctorProfileModel(
           name: response.data['doctor']['name'],
           email: response.data['doctor']['email'],

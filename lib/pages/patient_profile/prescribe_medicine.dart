@@ -3,6 +3,7 @@ import 'package:one_health_doctor_and_admin/constants/controller.dart';
 
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
 import 'package:one_health_doctor_and_admin/controllers/prescribe_medicine_controller.dart';
+import 'package:one_health_doctor_and_admin/controllers/profile_controller.dart';
 import 'package:one_health_doctor_and_admin/helpers/prescription_list_model.dart';
 import 'package:one_health_doctor_and_admin/helpers/text_field_validator_mixin.dart';
 import 'package:one_health_doctor_and_admin/routing/routes.dart';
@@ -207,7 +208,7 @@ class _PrescribeMedicineState extends State<PrescribeMedicine>
                           await prescribeMedicineController.postPrescription(
                         userId: widget.arguments["id"],
                         userName: widget.arguments["name"],
-                        doctorName: 'doctor',
+                        doctorName: doctorName!,
                         medicines: medicines,
                         dosage: dosage,
                         prescribedFor: prescribedFor,

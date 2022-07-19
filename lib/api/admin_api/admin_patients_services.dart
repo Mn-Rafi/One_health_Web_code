@@ -9,7 +9,7 @@ class AdminPatientServices {
     final token = preferences.getStringList('adminProfile')![1];
     try {
       final response = await dio.get(
-        'https://onehealthhospital.online/api/user',
+        'https://onehealthhospital.site/api/user',
         options: Options(headers: {
           'auth-token': token,
         }),
@@ -41,7 +41,7 @@ class AdminPatientServices {
     final token = preferences.getStringList('adminProfile')![1];
     try {
       final response = await dio.put(
-        'https://onehealthhospital.online/api/user/${userModel.sId}',
+        'https://onehealthhospital.site/api/user/${userModel.sId}',
         data: userModel.toJson(),
         options: Options(headers: {
           'auth-token': token,
@@ -68,7 +68,7 @@ class AdminPatientServices {
     final token = preferences.getStringList('adminProfile')![1];
     try {
       final response = await dio.delete(
-        'https://onehealthhospital.online/api/user/$userId',
+        'https://onehealthhospital.site/api/user/$userId',
         options: Options(headers: {
           'auth-token': token,
         }),

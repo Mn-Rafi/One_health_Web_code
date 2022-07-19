@@ -12,7 +12,7 @@ class AdminDoctorProfileServices {
 
     try {
       final response = await dio.get(
-        'https://onehealthhospital.online/api/doctor/',
+        'https://onehealthhospital.site/api/doctor/',
         options: Options(headers: {
           'auth-token': token,
         }),
@@ -54,7 +54,7 @@ class AdminDoctorProfileServices {
     }
     try {
       Response response =
-          await dio.delete('https://onehealthhospital.online/api/doctor/$id',
+          await dio.delete('https://onehealthhospital.site/api/doctor/$id',
               options: Options(headers: {
                 "auth-token": token ?? doctorToken,
               }));

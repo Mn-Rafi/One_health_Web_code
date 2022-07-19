@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:one_health_doctor_and_admin/api/admin_api/admin_login_api_services.dart';
 import 'package:one_health_doctor_and_admin/api/doctor_api/doctor_login_api_services.dart';
+import 'package:one_health_doctor_and_admin/constants/controller.dart';
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
 import 'package:one_health_doctor_and_admin/main.dart';
 import 'package:one_health_doctor_and_admin/pages/login/login_with_otp/verify_otp.dart';
@@ -47,13 +50,15 @@ class LoginPageController extends GetxController {
           email: email, password: password);
       if (response.statusCode == 200) {
         print('Logged In Succesfully');
+        log(response.data.toString());
         // Get.showSnackbar(GetSnackBar(title: "Logged In Succesfully"));
         print(['${response.data['doctorId']}', '${response.data['token']}']);
         await preferences.clear();
         await preferences.setStringList('doctorProfile', [
           '${response.data['doctorId']}',
-          '${response.data['token']}'
-        ]).then((value) {
+          '${response.data['token']}',
+        ]).then((value) async {
+          await profileController.doctorProfileResponse();
           Get.offAll(SiteLayout());
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('Logged In Succesfully')));
@@ -103,7 +108,6 @@ class LoginPageController extends GetxController {
         throw DioError;
       }
     } catch (e) {
-      showSnackBar(context: context, message: 'Error Occured ${e.toString()}');
       if (e is DioError) {
         showSnackBar(context: context, message: e.response!.data["message"]);
       }

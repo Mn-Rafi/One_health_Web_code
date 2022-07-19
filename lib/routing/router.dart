@@ -22,9 +22,9 @@ import 'package:flutter/material.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case adminDashBoardPage:
-      return _getPageRoute(const AdminDashboard());
+      return _getPageRoute(AdminDashboard());
     case adminAppointmentsPage:
-      return _getPageRoute(AdminAppoinments());
+      return _getPageRoute(AdminAppoinments(link: settings.arguments,));
     case adminPatientsPage:
       return _getPageRoute(AdminPatientsPage());
     case adminDoctorsPage:

@@ -8,6 +8,7 @@ class DoctorAppointmentDetailsModel {
   final String time;
   final String date;
   final String reason;
+  final String status;
   DoctorAppointmentDetailsModel({
     required this.name,
     required this.id,
@@ -18,6 +19,7 @@ class DoctorAppointmentDetailsModel {
     required this.time,
     required this.date,
     required this.reason,
+    required this.status,
   });
 }
 

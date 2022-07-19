@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:one_health_doctor_and_admin/api/doctor_api/doctor_appointments_services.dart';
@@ -17,6 +19,7 @@ class DoctorAppointmentsController extends GetxController {
         token: preferences.getStringList('doctorProfile')![1],
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
+        log(response.data['appointment'].toString());
         doctorAppointmentDetailsModelList.clear();
         for (int i = 0; i < response.data['appointment'].length; i++) {
           doctorAppointmentDetailsModelList.add(DoctorAppointmentDetailsModel(
@@ -28,6 +31,7 @@ class DoctorAppointmentsController extends GetxController {
               mobile: response.data['appointment'][i]['phone'].toString(),
               date: response.data['appointment'][i]['date'].toString(),
               time: response.data['appointment'][i]['time'].toString(),
+              status: response.data['appointment'][i]['status'].toString(),
               reason: response.data['appointment'][i]['reason'].toString()));
         }
         print(

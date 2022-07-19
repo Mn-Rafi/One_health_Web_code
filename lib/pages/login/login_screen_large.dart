@@ -96,14 +96,16 @@ class LoginScreenLarge extends StatelessWidget with TextFieldValidator {
                                   print(loginPageController.pageTitle.value);
                                   loginPageController.doctorloginResponse(
                                       emailController.text,
-                                      passwordController.text, context);
+                                      passwordController.text,
+                                      context);
                                 } else {
                                   print(loginPageController.pageTitle.value);
                                   print(emailController.text +
                                       passwordController.text);
                                   loginPageController.adminloginResponse(
                                       emailController.text,
-                                      passwordController.text, context);
+                                      passwordController.text,
+                                      context);
                                 }
                               }
                             },
@@ -111,24 +113,28 @@ class LoginScreenLarge extends StatelessWidget with TextFieldValidator {
                                 bgColor: Colors.deepPurple, text: 'SIGN IN'),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '- OR -',
-                            style: mainHeaderStyle.copyWith(color: Colors.blue),
-                          ),
-                        ),
-                        MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.to(ScreenSignInwithOtp());
-                            },
-                            child: const CustomSubmitButton(
-                                bgColor: Colors.orange,
-                                text: 'SIGN IN WITH OTP'),
-                          ),
-                        ),
+                        if (loginPageController.pageTitle.value == "Doctor")
+                          Column(children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                '- OR -',
+                                style: mainHeaderStyle.copyWith(
+                                    color: Colors.blue),
+                              ),
+                            ),
+                            MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(ScreenSignInwithOtp());
+                                },
+                                child: const CustomSubmitButton(
+                                    bgColor: Colors.orange,
+                                    text: 'SIGN IN WITH OTP'),
+                              ),
+                            ),
+                          ]),
                       ],
                     ),
                   ),

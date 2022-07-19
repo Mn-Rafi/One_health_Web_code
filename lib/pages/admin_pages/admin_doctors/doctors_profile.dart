@@ -212,6 +212,9 @@ class DoctorProfileAdminSide extends StatelessWidget {
                               CustomButtonOne(
                                   onPressed: () {
                                     print('Appointments');
+                                    navigationController.navigateTo(
+                                        adminAppointmentsPage,
+                                        arguments: '/doctor/${doctor.sId}');
                                   },
                                   text: 'Appointments'),
                               CustomButtonOne(

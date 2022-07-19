@@ -10,7 +10,7 @@ class DoctorChangePasswordServices {
       "cPassword": newPassword,
     };
     Response reponse = await dio.put(
-        'https://onehealthhospital.online/doctor/changepassword/$id',
+        'https://onehealthhospital.site/doctor/changepassword/$id',
         data: formData,
         options: Options(headers: {
           "auth-token": authToken,
@@ -27,7 +27,7 @@ class DoctorChangePasswordServices {
       "cPassword": newPassword,
     };
     Response reponse = await dio.put(
-        'https://onehealthhospital.online/admin/changepassword/$id',
+        'https://onehealthhospital.site/admin/changepassword/$id',
         data: formData,
         options: Options(headers: {
           "auth-token": authToken,

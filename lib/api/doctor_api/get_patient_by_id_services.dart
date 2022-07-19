@@ -9,7 +9,7 @@ class GetPatientByIdServices {
     };
 
     Response response = await dio.get(
-        'https://onehealthhospital.online/api/user/$userId',
+        'https://onehealthhospital.site/api/user/$userId',
         options: Options(headers: data));
 
     return response;

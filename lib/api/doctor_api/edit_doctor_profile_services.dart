@@ -8,7 +8,8 @@ class EditDoctorProfileServise {
       required String token}) async {
     print('**********************************3');
     Dio dio = Dio();
-    var formData = {
+    String fileName = doctorEditProfileModel.imagePath.path.split('/').last;
+    FormData formData = FormData.fromMap({
       "name": doctorEditProfileModel.name,
       "qualification": doctorEditProfileModel.qualification,
       "department": doctorEditProfileModel.department,
@@ -20,12 +21,15 @@ class EditDoctorProfileServise {
       "endTime": doctorEditProfileModel.finishingTime,
       "fee": doctorEditProfileModel.feeAmount,
       "admin": doctorEditProfileModel.isAdmin,
-      "image": doctorEditProfileModel.imagePath,
+      "image": await MultipartFile.fromFile(
+          doctorEditProfileModel.imagePath.path,
+          filename: fileName),
+      // doctorEditProfileModel.imagePath,
       "active": doctorEditProfileModel.isActive ?? true,
       "request": false,
-    };
+    });
     Response response = await dio
-        .put('https://onehealthhospital.online/api/doctor/$id',
+        .put('https://onehealthhospital.site/api/doctor/$id',
             data: formData,
             options: Options(headers: {
               "auth-token": token,

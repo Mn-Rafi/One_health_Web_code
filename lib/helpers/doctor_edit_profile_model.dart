@@ -1,5 +1,7 @@
 
 
+import 'dart:io';
+
 class DoctorEditProfileModel {
   final bool? isActive;
   final String name;
@@ -15,7 +17,7 @@ class DoctorEditProfileModel {
   final List<int>   days;
   final int feeAmount;
   final bool? isRequested;
-  final String imagePath;
+  final File imagePath;
   final bool isAdmin;
   // final File? image;
   DoctorEditProfileModel({

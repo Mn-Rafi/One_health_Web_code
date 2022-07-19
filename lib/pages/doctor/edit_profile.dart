@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:one_health_doctor_and_admin/constants/constant_lists.dart';
 import 'package:one_health_doctor_and_admin/constants/controller.dart';
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
+import 'package:one_health_doctor_and_admin/helpers/asset_to_file_convert.dart';
 import 'package:one_health_doctor_and_admin/helpers/doctor_edit_profile_model.dart';
 import 'package:one_health_doctor_and_admin/helpers/doctor_profile_model.dart';
 import 'package:one_health_doctor_and_admin/helpers/text_field_validator_mixin.dart';
@@ -44,6 +47,7 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
   bool isSaturdaySelected = false;
   bool isSundaySelected = false;
   late bool isAdmin;
+  bool isFirst = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -94,44 +98,49 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                   ),
                 );
               } else if (snapshot.hasData) {
-                widget.nameController.text = snapshot.data!.name;
-                widget.emailController.text = snapshot.data!.email;
-                widget.phoneNumberController.text =
-                    snapshot.data!.phoneNumber!.substring(3);
-                widget.qualificationController.text =
-                    snapshot.data!.qualification;
-                widget.departmentsController.text = snapshot.data!.department;
-                widget.experienceController.text = snapshot.data!.experience;
-                widget.expertiseController.text =
-                    snapshot.data!.areaOfExpertise;
-                widget.startingTimeController.text = snapshot.data!.opTimeStart;
-                widget.finishingTimeController.text = snapshot.data!.opTimeEnd;
-                widget.feeAmountController.text = snapshot.data!.fee.toString();
-                widget.daysController.text = snapshot.data!.days.toString();
-                widget.imageController.text = snapshot.data!.imagePath;
-                isAdmin = snapshot.data!.isAdmin;
-                if (snapshot.data!.days.contains(1)) {
-                  isSundaySelected = true;
+                if (isFirst) {
+                  isFirst = false;
+                  widget.nameController.text = snapshot.data!.name;
+                  widget.emailController.text = snapshot.data!.email;
+                  widget.phoneNumberController.text =
+                      snapshot.data!.phoneNumber!.substring(3);
+                  widget.qualificationController.text =
+                      snapshot.data!.qualification;
+                  widget.departmentsController.text = snapshot.data!.department;
+                  widget.experienceController.text = snapshot.data!.experience;
+                  widget.expertiseController.text =
+                      snapshot.data!.areaOfExpertise;
+                  widget.startingTimeController.text =
+                      snapshot.data!.opTimeStart;
+                  widget.finishingTimeController.text =
+                      snapshot.data!.opTimeEnd;
+                  widget.feeAmountController.text =
+                      snapshot.data!.fee.toString();
+                  widget.daysController.text = snapshot.data!.days.toString();
+                  widget.imageController.text = snapshot.data!.imagePath;
+                  isAdmin = snapshot.data!.isAdmin;
+                  if (snapshot.data!.days.contains(1)) {
+                    isSundaySelected = true;
+                  }
+                  if (snapshot.data!.days.contains(2)) {
+                    isMondaySelected = true;
+                  }
+                  if (snapshot.data!.days.contains(3)) {
+                    isTuesdaySelected = true;
+                  }
+                  if (snapshot.data!.days.contains(4)) {
+                    isWednesdaySelected = true;
+                  }
+                  if (snapshot.data!.days.contains(5)) {
+                    isThursdaySelected = true;
+                  }
+                  if (snapshot.data!.days.contains(6)) {
+                    isFridaySelected = true;
+                  }
+                  if (snapshot.data!.days.contains(7)) {
+                    isSaturdaySelected = true;
+                  }
                 }
-                if (snapshot.data!.days.contains(2)) {
-                  isMondaySelected = true;
-                }
-                if (snapshot.data!.days.contains(3)) {
-                  isTuesdaySelected = true;
-                }
-                if (snapshot.data!.days.contains(4)) {
-                  isWednesdaySelected = true;
-                }
-                if (snapshot.data!.days.contains(5)) {
-                  isThursdaySelected = true;
-                }
-                if (snapshot.data!.days.contains(6)) {
-                  isFridaySelected = true;
-                }
-                if (snapshot.data!.days.contains(7)) {
-                  isSaturdaySelected = true;
-                }
-
                 return SingleChildScrollView(
                   child: Form(
                     key: _formKey,
@@ -327,7 +336,8 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                               'Select working days : ',
                               style: GoogleFonts.ubuntu(color: Colors.black),
                             ),
-                            StatefulBuilder(builder: (context, function) {
+                            StatefulBuilder(
+                              builder: (context, function) {
                               return SizedBox(
                                 width: 900,
                                 child: Row(
@@ -556,7 +566,7 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                             MouseRegion(
                               cursor: SystemMouseCursors.click,
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   if (_formKey.currentState!.validate()) {
                                     doctorProfileEditController.editProfile(
                                         DoctorEditProfileModel(
@@ -583,7 +593,10 @@ class _DoctorEditProfileState extends State<DoctorEditProfile>
                                             isRequested: true,
                                             id: '',
                                             imagePath:
-                                                widget.imageController.text),
+                                                await getImageFileFromAssets(
+                                                    'assets/images/doctor1.png')
+                                            // widget.imageController.text,
+                                            ),
                                         context,
                                         false);
                                   }

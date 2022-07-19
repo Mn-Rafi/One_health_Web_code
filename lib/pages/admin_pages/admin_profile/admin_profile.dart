@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:one_health_doctor_and_admin/api/admin_api/admin_access_services.dart';
 import 'package:one_health_doctor_and_admin/constants/controller.dart';
@@ -370,8 +372,7 @@ class AdminProfile extends StatelessWidget {
                                                   Spacer(),
                                                   CustomButtonOne(
                                                       onPressed: () {
-                                                        print(
-                                                            'Delete Admin');
+                                                        print('Delete Admin');
                                                         doctorProfileEditController
                                                             .editProfile(
                                                           DoctorEditProfileModel(
@@ -419,9 +420,11 @@ class AdminProfile extends StatelessWidget {
                                                                     .fee!
                                                                     .toString()),
                                                             isRequested: true,
-                                                            imagePath: snapshot
-                                                                .data![index]
-                                                                .imagePath!,
+                                                            imagePath: File(
+                                                                snapshot
+                                                                    .data![
+                                                                        index]
+                                                                    .imagePath!),
                                                           ),
                                                           context,
                                                           true,

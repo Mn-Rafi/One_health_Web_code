@@ -40,6 +40,7 @@ class AppointmentsPage extends StatelessWidget {
                           CustomTableHead(title: 'Patient Name'),
                           CustomTableHead(title: 'Date'),
                           CustomTableHead(title: 'Time'),
+                          CustomTableHead(title: 'Status'),
                           CustomTableHead(title: 'Reason'),
                           CustomTableHead(title: 'Profile'),
                         ])
@@ -95,6 +96,12 @@ class AppointmentsPage extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 50.0, vertical: 10),
                                       child: Text(snapshot.data![index]!.time
+                                          .toString()),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 50.0, vertical: 10),
+                                      child: Text(snapshot.data![index]!.status
                                           .toString()),
                                     ),
                                     Padding(

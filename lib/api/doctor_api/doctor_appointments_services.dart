@@ -10,7 +10,7 @@ class DoctorAppointmetnsServices {
     };
 
     Response response = await dio.get(
-        'https://onehealthhospital.online/api/appointment/doctor/$id',
+        'https://onehealthhospital.site/api/appointment/doctor/$id',
         options: Options(headers: data));
     print(response.data);
 

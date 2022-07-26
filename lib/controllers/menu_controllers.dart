@@ -40,10 +40,13 @@ class MenuController extends GetxController {
         return _customIcon(Icons.medical_services_outlined, itemName);
       case adminDepartmentsPage:
         return _customIcon(Icons.category, itemName);
+      case adminAmbulance:
+        return _customIcon(Icons.emergency, itemName);
       case adminProfilePage:
         return _customIcon(Icons.admin_panel_settings_outlined, itemName);
       default:
         return _customIcon(Icons.exit_to_app, itemName);
+      
     }
   }
 

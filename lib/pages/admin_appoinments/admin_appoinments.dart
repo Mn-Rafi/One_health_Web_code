@@ -140,7 +140,10 @@ class AdminAppoinments extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 10.0, vertical: 10),
-                                  child: Text(list[index].date.toString()),
+                                  child: Text(list[index]
+                                      .date
+                                      .toString()
+                                      .substring(0, 10)),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(

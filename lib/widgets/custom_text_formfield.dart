@@ -7,6 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final TextInputType keyBoardType;
   final IconData? iconData;
+  final void Function(String)? onChanged;
   final bool obscure;
   final VoidCallback? suffixAction;
   final TextInputAction? nextAction;
@@ -14,6 +15,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     Key? key,
     this.validator,
+    this.onChanged,
     this.sufficiconData,
     required this.hintText,
     required this.keyBoardType,
@@ -37,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
       controller: textController,
       keyboardType: keyBoardType,
       validator: validator,
+      onChanged: onChanged ?? (val) {},
       keyboardAppearance: Brightness.dark,
       style: GoogleFonts.ubuntu(color: Colors.black),
       decoration: InputDecoration(

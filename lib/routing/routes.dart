@@ -14,6 +14,7 @@ const adminPatientsPage = 'Patients List';
 const adminDoctorsPage = 'Doctors List';
 const adminDepartmentsPage = 'Departments List';
 const adminProfilePage = 'Admin Profile';
+const adminAmbulance = 'Ambulance';
 const adminDoctorProfileViewPage = 'Admin Doctor Profile';
 
 const adminPatientProfileViewPage = 'Admin Patient Profile';
@@ -32,6 +33,7 @@ List sideMenuitemsAdmin = [
   adminPatientsPage,
   adminDoctorsPage,
   adminDepartmentsPage,
+  adminAmbulance,
   adminProfilePage,
   authenticationPageView,
 ];

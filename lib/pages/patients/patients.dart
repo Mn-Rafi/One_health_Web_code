@@ -37,7 +37,6 @@ class PatientsPage extends StatelessWidget {
                           color: Colors.blue,
                         ),
                         children: [
-                          CustomTableHead(title: 'ID'),
                           CustomTableHead(title: 'Patient Name'),
                           CustomTableHead(title: 'Age'),
                           CustomTableHead(title: 'Gender'),
@@ -77,12 +76,6 @@ class PatientsPage extends StatelessWidget {
                                   snapshot.data!.length, (index) {
                                 return TableRow(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20.0, vertical: 10),
-                                      child: Text(
-                                          snapshot.data![index]!.id.toString()),
-                                    ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20.0, vertical: 10),

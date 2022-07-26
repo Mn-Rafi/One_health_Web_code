@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:one_health_doctor_and_admin/api/admin_api/admin_appoinment_servies.dart';
 import 'package:one_health_doctor_and_admin/api/admin_api/admin_dashboard_services.dart';
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
+import 'package:one_health_doctor_and_admin/helpers/admin_appoinments_list_model.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class AmountChart extends StatelessWidget {
@@ -14,6 +16,8 @@ class AmountChart extends StatelessWidget {
 
   final AdminDashBoardServices _adminDashBoardServices =
       AdminDashBoardServices();
+  final AdminAppoinmentServices _adminAppoinmentServices =
+      AdminAppoinmentServices();
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +39,26 @@ class AmountChart extends StatelessWidget {
                 height: 20,
               ),
               Expanded(
-                child: FutureBuilder<List<AmountANdDateSeperate>?>(
-                  future: _adminDashBoardServices.getAmountChartData(),
+                child: FutureBuilder<List<AmountChartModelClass>?>(
+                  future: _adminAppoinmentServices.getAllAppoinmentsforChart(
+                      link: '/'),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return SfCartesianChart(
-                          primaryXAxis: CategoryAxis(),
+                          primaryXAxis: CategoryAxis(visibleMaximum: 6),
                           primaryYAxis: NumericAxis(
                               minimum: 0, maximum: 2000, interval: 200),
                           tooltipBehavior: _tooltipBehavior,
-                          series: <ChartSeries<AmountANdDateSeperate, String>>[
-                            ColumnSeries<AmountANdDateSeperate, String>(
+                          series: <ChartSeries<AmountChartModelClass, String>>[
+                            ColumnSeries<AmountChartModelClass, String>(
                                 dataSource: snapshot.data!,
-                                xValueMapper: (AmountANdDateSeperate data, _) =>
-                                    data.date,
-                                yValueMapper: (AmountANdDateSeperate data, _) =>
+                                xValueMapper: (AmountChartModelClass data, _) =>
+                                    data.date.substring(5,10),
+                                yValueMapper: (AmountChartModelClass data, _) =>
                                     data.amount,
                                 name: 'Income',
                                 color: Color.fromRGBO(8, 142, 255, 1))
                           ]);
-                      
                     }
                     return Column(
                       children: const [

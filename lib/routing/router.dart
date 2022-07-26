@@ -1,5 +1,6 @@
 import 'package:one_health_doctor_and_admin/helpers/admin_department_response_model.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_appoinments/admin_appoinments.dart';
+import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_ambulance/admin_ambulance.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_dashboard/admin_dashboard.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_departments/admin_departments.dart';
 import 'package:one_health_doctor_and_admin/pages/admin_pages/admin_doctors/admin_doctors.dart';
@@ -24,7 +25,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case adminDashBoardPage:
       return _getPageRoute(AdminDashboard());
     case adminAppointmentsPage:
-      return _getPageRoute(AdminAppoinments(link: settings.arguments,));
+      return _getPageRoute(AdminAppoinments(
+        link: settings.arguments,
+      ));
     case adminPatientsPage:
       return _getPageRoute(AdminPatientsPage());
     case adminDoctorsPage:
@@ -45,6 +48,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(PatientProfilePage(
         map: settings.arguments,
       ));
+    case adminAmbulance:
+      return _getPageRoute(const AdminAmbulance());
     case adminDoctorProfileViewPage:
       return _getPageRoute(DoctorProfileAdminSide(doctor: settings.arguments));
     case adminPatientProfileViewPage:

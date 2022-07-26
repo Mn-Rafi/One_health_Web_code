@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:one_health_doctor_and_admin/controllers/doctor_appointments_controller.dart';
 import 'package:one_health_doctor_and_admin/controllers/doctor_password_change_controller.dart';
 import 'package:one_health_doctor_and_admin/controllers/doctor_patients_controller.dart';
@@ -13,8 +14,10 @@ import 'package:one_health_doctor_and_admin/pages/login/loginpage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(MenuController());
   Get.put(NavigationController());
   Get.put(LoginPageController());
@@ -26,6 +29,15 @@ void main() {
   Get.put(DoctorProfileEditController());
   Get.put(GetPatientByIDController());
   Get.put(PrescribeMedicineController());
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+        apiKey: "AIzaSyDJIYo19K2YtDiQaYaJVGpDX_7GZbEjLOg",
+        authDomain: "one-health-ced00.firebaseapp.com",
+        projectId: "one-health-ced00",
+        storageBucket: "one-health-ced00.appspot.com",
+        messagingSenderId: "880415117031",
+        appId: "1:880415117031:web:2b5f33863a7f5cadcb1c42"),
+  );
   runApp(const MyApp());
 }
 

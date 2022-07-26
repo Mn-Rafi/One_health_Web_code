@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:one_health_doctor_and_admin/constants/controller.dart';
 
 import 'package:one_health_doctor_and_admin/constants/styles.dart';
@@ -6,6 +7,7 @@ import 'package:one_health_doctor_and_admin/controllers/prescribe_medicine_contr
 import 'package:one_health_doctor_and_admin/controllers/profile_controller.dart';
 import 'package:one_health_doctor_and_admin/helpers/prescription_list_model.dart';
 import 'package:one_health_doctor_and_admin/helpers/text_field_validator_mixin.dart';
+import 'package:one_health_doctor_and_admin/pages/patient_profile/medicine_list.dart';
 import 'package:one_health_doctor_and_admin/routing/routes.dart';
 import 'package:one_health_doctor_and_admin/widgets/custom_submit_button.dart';
 import 'package:one_health_doctor_and_admin/widgets/custom_table_header.dart';
@@ -66,16 +68,54 @@ class _PrescribeMedicineState extends State<PrescribeMedicine>
                     const SizedBox(
                       height: 50,
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 50),
+                    //   child: CustomTextFormField(
+                    //       hintText: 'Medicine*',
+                    //       validator: (value) {
+                    //         return isValid(value, 'medicine');
+                    //       },
+                    //       keyBoardType: TextInputType.name,
+                    //       iconData: Icons.medication_sharp,
+                    //       textController: medicineController),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
-                      child: CustomTextFormField(
-                          hintText: 'Medicine*',
-                          validator: (value) {
-                            return isValid(value, 'medicine');
-                          },
-                          keyBoardType: TextInputType.name,
-                          iconData: Icons.medication_sharp,
-                          textController: medicineController),
+                      child: TypeAheadFormField(
+                        onSuggestionSelected: (String val) {
+                          this.medicineController.text = val;
+                        },
+                        getImmediateSuggestions: true,
+                        hideSuggestionsOnKeyboardHide: true,
+                        hideOnError: true,
+                        textFieldConfiguration: TextFieldConfiguration(
+                          controller: medicineController,
+                          decoration: InputDecoration(
+                            hintText: 'Medicine*',
+                            prefixIcon: Icon(
+                              Icons.medication_sharp,
+                              size: 17,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                            ),
+                            labelText: 'Medicine*',
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                        hideOnEmpty: false,
+                        itemBuilder: (_, String item) =>
+                            ListTile(title: Text(item)),
+                        suggestionsCallback: (pattern) => medicinesList.where(
+                            (element) => element
+                                .toLowerCase()
+                                .contains(pattern.toString().toLowerCase())),
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -214,10 +254,15 @@ class _PrescribeMedicineState extends State<PrescribeMedicine>
                         prescribedFor: prescribedFor,
                         context: context,
                       );
+                      setState(() {
+                        presList.clear();
+                      });
                       print('*****************************');
                       if (isPrescribed) {
                         print('HELOOOOOOOOOOOOOOOOO');
-                        setState(() {});
+                        setState(() {
+                          presList.clear();
+                        });
                       }
                     },
                     child: const CustomSubmitButton(

@@ -65,8 +65,8 @@ class AppointmentsPage extends StatelessWidget {
                               padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'No Appointments Found',
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.black),
+                                style: TextStyle(
+                                    fontSize: 18, color: Colors.black),
                               ),
                             ),
                           );
@@ -90,7 +90,8 @@ class AppointmentsPage extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 50.0, vertical: 10),
                                       child: Text(snapshot.data![index]!.date
-                                          .toString()),
+                                          .toString()
+                                          .substring(0, 10)),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(

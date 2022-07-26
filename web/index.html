@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,7 +28,7 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>one_health_doctor_and_admin</title>
   <link rel="manifest" href="manifest.json">
@@ -39,20 +40,40 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
+
 <body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+  <!-- Add for Cloud Firestore: https://pub.dev/packages/cloud_firestore -->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+  <!-- <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCtsz5LcoB6xppuxxyyymGP4Gs_FjMx_Bc",
+      authDomain: "setup-fb-2150b.firebaseapp.com",
+      projectId: "setup-fb-2150b",
+      storageBucket: "setup-fb-2150b.appspot.com",
+      messagingSenderId: "297288225436",
+      appId: "1:297288225436:web:1d07102839afd6a195d359",
+      measurementId: "G-2G1TWS3Y9Y"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script> -->
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         }
-      }).then(function(engineInitializer) {
+      }).then(function (engineInitializer) {
         return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
+      }).then(function (appRunner) {
         return appRunner.runApp();
       });
     });
   </script>
 </body>
+
 </html>

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:one_health_doctor_and_admin/controllers/doctor_appointments_controller.dart';
 import 'package:one_health_doctor_and_admin/controllers/doctor_password_change_controller.dart';
 import 'package:one_health_doctor_and_admin/controllers/doctor_patients_controller.dart';

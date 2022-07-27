@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: webpageTitle,
+        title: 'One Health Hospital',
         theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,
             textTheme:

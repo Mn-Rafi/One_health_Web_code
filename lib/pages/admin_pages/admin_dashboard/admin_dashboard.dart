@@ -27,7 +27,7 @@ class AdminDashboard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            child: Wrap(
+            child: Row(
               children: [
                 SizedBox(
                   width: 500,
@@ -176,12 +176,12 @@ class AdminDashboard extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Wrap(
-            children: [
-              AmountChart(),
-              DepartmentListChart(),
-            ],
-          ),
+          // Wrap(
+          //   children: [
+          //     AmountChart(),
+          //     DepartmentListChart(),
+          //   ],
+          // ),
         ],
       ),
     );
